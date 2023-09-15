@@ -1,0 +1,101 @@
+class Solution {
+    
+    //Recursion(TLE)  T.C = O(n^M);
+
+    public int solveRec(int[] coins, int amount){
+        if(amount == 0){
+            return 0;
+        }
+        if(amount < 0){
+            return Integer.MAX_VALUE;
+            
+        }
+        
+        int mini = Integer.MAX_VALUE;
+        for(int i=0;i<coins.length;i++){
+            int ans = solveRec(coins,amount-coins[i]);
+            
+            if(ans != Integer.MAX_VALUE){
+                mini = Math.min(mini,1+ans);
+            }
+        }
+        return mini;
+    }
+    
+    
+    // top-down    T.C = O(X*N)  X for amount , M for No. of coins    S.C=O(X);
+    
+    public int solve(int[] coins, int amount,int[] dp){
+           if(amount == 0){
+            return 0;
+            }
+         if(amount < 0){
+            return Integer.MAX_VALUE;
+            
+          }
+        
+        
+        if(dp[amount] != -1){
+            return dp[amount];
+        }
+        
+          int mini = Integer.MAX_VALUE;
+        for(int i=0;i<coins.length;i++){
+            int ans = solve(coins,amount-coins[i],dp);
+            
+            if(ans != Integer.MAX_VALUE){
+                mini = Math.min(mini,1+ans);
+            }
+        }
+        dp[amount] = mini;
+        return dp[amount];
+        
+        
+    }
+    
+    // bottom Up T.C = O(X*N)  S.C=O(X);
+    
+    public int solve2(int[] coins, int amount){
+         int[] dp = new int[amount + 1];
+        Arrays.fill(dp, Integer.MAX_VALUE);
+        dp[0] = 0;
+
+        for (int i = 1; i <= amount; i++) {
+            for (int j = 0; j < coins.length; j++) { // Use "<" instead of "<=" here
+                if (i - coins[j] >= 0 && dp[i - coins[j]] != Integer.MAX_VALUE) {
+                    dp[i] = Math.min(dp[i], 1 + dp[i - coins[j]]);
+                }
+            }
+        }
+
+        if (dp[amount] == Integer.MAX_VALUE) {
+            return -1;
+        }
+        
+        return dp[amount];
+    }
+    
+    // ----->>>> There is no space optimization because it does not depend on prev 2 value
+    
+    public int coinChange(int[] coins, int amount) {
+        
+      //  int ans = solveRec(coins,amount);
+        
+//         int[] dp=new int[amount+1];
+//         Arrays.fill(dp,-1);
+        
+//         int ans= solve(coins, amount, dp);
+        
+        
+        
+//         if(ans == Integer.MAX_VALUE){
+//             return -1;
+//         }
+//         return ans;
+        
+        return solve2(coins,amount);
+        
+        
+    }
+  
+}
