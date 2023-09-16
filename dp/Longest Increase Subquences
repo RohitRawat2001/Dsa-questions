@@ -1,0 +1,119 @@
+class Solution {
+
+    //Recursion
+
+    public int solveRec(int size,int a[],int curr,int prev){
+        if(curr == size){
+            return 0;
+        }
+        
+        int take = 0;
+        if(prev == -1 || a[curr] > a[prev])
+        take = 1 + solveRec(size, a, curr+1,curr);
+        
+        int nottake= 0 + solveRec(size, a , curr+1,prev);
+        
+        return Math.max(take,nottake);
+    }
+    
+    
+
+     public int solveMem(int size, int a[], int curr, int prev, int[][] dp) {
+        if (curr == size) {
+            return 0;
+        }
+        
+        if (dp[curr][prev+1] != -1) {
+            return dp[curr][prev+1];
+        }
+        
+        //include
+        int take = 0;
+        if (prev == -1 || a[curr] > a[prev]) {
+            take = 1 + solveMem(size, a, curr + 1, curr, dp);
+        }
+        
+        //exclude
+        int notTake = 0 + solveMem(size, a, curr + 1, prev, dp);
+        
+        dp[curr][prev+1] = Math.max(take, notTake);
+        
+        return dp[curr][prev+1];
+    }
+    
+    
+
+     static int solveTab(int size, int a[]){
+
+        int[][] dp=new int[size+1][size+1];
+        for(int i=0;i<size;i++){
+            Arrays.fill(dp[i],0);
+        }
+        
+        for(int curr=size-1;curr>=0;curr--){
+            for(int prev=curr-1;prev>=-1;prev--){
+                 //include
+        
+             int take = 0;
+        if (prev == -1 || a[curr] > a[prev]) {
+            take = 1 + dp[curr + 1][ curr+1];
+        }
+        
+        //exclude
+        int notTake = 0 + dp[curr + 1][prev+1];
+        
+        dp[curr][prev+1] = Math.max(take, notTake);
+        
+       
+            }
+        }
+        
+         return dp[0][-1+1];
+    }
+
+    
+    
+    static int space(int size,int a[]){
+         int[] currRow=new int[size+1];
+        int[] nextRow=new int[size+1];
+        Arrays.fill(currRow,0);
+        Arrays.fill(nextRow,0);
+        
+        for(int curr=size-1;curr>=0;curr--){
+            for(int prev=curr-1;prev>=-1;prev--){
+                 //include
+        
+             int take = 0;
+        if (prev == -1 || a[curr] > a[prev]) {
+            take = 1 + nextRow[ curr+1];
+        }
+        
+        //exclude
+        int notTake = 0 + nextRow[prev+1];
+        
+       currRow[prev+1] = Math.max(take, notTake);
+        
+       
+            }
+            nextRow=currRow;
+        }
+        
+         return nextRow[-1+1];
+    }
+    
+    
+    
+    
+    public int lengthOfLIS(int[] a) {
+        int size=a.length;
+        // int[][] dp = new int[size][size + 1];
+        // for (int i = 0; i < size; i++) {
+        //     Arrays.fill(dp[i], -1);
+        // }
+        
+        // return solveMem(size, a, 0, -1, dp);
+
+        return solveRec(size,a,0,-1);
+        
+    }
+}
