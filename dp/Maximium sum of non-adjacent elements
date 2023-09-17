@@ -90,6 +90,26 @@ public class Solution {
         return prev2;
 
        }
+// Space to memoization
+ public static int  SpaceOptToMemoization(ArrayList<Integer> nums){
+           int n = nums.size();
+
+        int prev2 = 0;
+        int prev1 = nums.get(0);
+
+        for (int i = 1; i < n; i++) {
+            int include = prev2 + nums.get(i);
+            int exclude = prev1;
+
+            int ans = Math.max(include, exclude);
+            prev2 = prev1;
+            prev1 = ans;
+        }
+
+        return prev1;
+
+
+       }
 
 
     public static int maximumNonAdjacentSum(ArrayList<Integer> nums) {
