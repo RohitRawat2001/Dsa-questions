@@ -38,6 +38,8 @@ class Solution {
         }
         return dp[tar] = ans;
     }
+
+//  Botton_UP
     public int solveTab(int[] nums,int tar){
         
         int[] dp = new int[tar+1];
