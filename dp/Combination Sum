@@ -1,0 +1,68 @@
+class Solution {
+    
+    // Recursion
+    public int solveRec(int[] nums,int tar){
+        if(tar == 0){
+            return 1;
+        }
+        if(tar < 0){
+            return 0;
+        }
+        
+        int ans = 0;
+        
+        for(int i = 0;i<nums.length;i++){
+            ans += solveRec(nums, tar - nums[i]);
+        }
+        return ans;
+        
+      }
+    
+    // top-down
+    public int solveMem(int[] nums,int tar,int[] dp){
+        if(tar == 0){
+            return 1;
+        }
+        if(tar < 0){
+            return 0;
+        }
+        
+        if(dp[tar] != -1){
+            return dp[tar];
+        }
+        
+        int ans = 0;
+        
+        for(int i = 0;i<nums.length;i++){
+            ans += solveMem(nums, tar - nums[i],dp);
+        }
+        return dp[tar] = ans;
+    }
+    public int solveTab(int[] nums,int tar){
+        
+        int[] dp = new int[tar+1];
+        
+        dp[0] = 1;
+        
+        for(int i=1;i<=tar;i++){
+            for(int j=0;j<nums.length;j++){
+                if(i-nums[j] >= 0)
+                dp[i] += dp[i - nums[j]];
+            }
+        }
+        return dp[tar];
+        
+    }
+    
+    
+    public int combinationSum4(int[] nums, int target) {
+        //return solveRec(nums,target);
+        
+//         int[] dp = new int[target+1];
+//         Arrays.fill(dp,-1);
+        
+//         return solveMem(nums, target, dp);
+        
+        return solveTab(nums,target);
+    }
+}
