@@ -1,0 +1,46 @@
+class Solution {
+    
+     public int solve(int[] nums){
+         int n = nums.length;
+
+        int prev2 = 0;
+        int prev1 = nums[0];
+
+        for (int i = 1; i < n; i++) {
+            int include = prev2 + nums[i];
+            int exclude = prev1;
+
+            int ans = Math.max(include, exclude);
+            prev2 = prev1;
+            prev1 = ans;
+        }
+
+        return prev1;
+
+    }
+    public int rob(int[] nums) {
+        int n = nums.length;
+
+        //Ek hi house hai
+        if (n == 1) {
+            return nums[0];
+        }
+        
+//         int[] first = new int[n - 1];
+//         int[] second = new int[n - 1];
+        
+//         for (int i = 0; i < n; i++) {
+//             if (i != 0) first[i - 1] = nums[i];
+//             if (i != n - 1) second[i] = nums[i];
+//         }
+        
+        
+        //  OR   both are same what You want to choice
+        
+
+        int[] first = Arrays.copyOfRange(nums, 0, n - 1);
+        int[] second = Arrays.copyOfRange(nums, 1, n);
+
+        return Math.max(solve(first), solve(second));
+    }
+}
