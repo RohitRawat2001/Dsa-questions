@@ -1,0 +1,36 @@
+public class Solution {
+
+    public static Node FloydDetection(Node head) {
+        if (head == null) {
+            return null;
+        }
+
+        Node slow = head;
+        Node fast = head;
+
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+
+            if (slow == fast) {
+                return slow;
+            }
+        }
+        return null;
+    }
+    
+    public static boolean isCircular(Node<Integer> head) {
+        // Write your code here.
+        if(head==null ){
+            return true;
+        }
+          Node temp = FloydDetection(head);
+
+          if(temp == head){
+              return true;
+          }else{
+              return false;
+          }
+    }
+
+}
