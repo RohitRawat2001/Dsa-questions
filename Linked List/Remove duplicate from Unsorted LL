@@ -1,3 +1,8 @@
+// This is optimal code for both sorted or unsorted LL
+
+The time complexity of the provided code for removing duplicates from an unsorted linked list using a HashMap (or Hashtable) is O(n),(where n is the number of nodes in the linked list.)
+The space complexity is also O(n), (where n is the number of unique values in the linked list.)
+
 class Solution
 {
     //Function to remove duplicates from unsorted linked list.
