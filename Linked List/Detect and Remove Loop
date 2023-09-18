@@ -53,3 +53,4 @@ public class Solution {
         temp.next = null; // Remove the loop by breaking the last node's next pointer.
         return head;
     }
+}
