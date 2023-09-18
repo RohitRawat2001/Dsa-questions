@@ -1,0 +1,100 @@
+
+Approach 1 :  Both T.C = O(n)  S.C = O(1)
+
+public class Solution
+{
+    public static Node sortList(Node head) {
+        
+        int zeroCount = 0;
+        int OneCount = 0;
+        int TwoCount = 0;
+
+        Node curr =head;
+
+        while(curr != null){
+            if(curr.data == 0){
+                zeroCount++;
+            }else if(curr.data == 1){
+                OneCount++;
+            }else if(curr.data == 2){
+                TwoCount++;
+            }
+            curr = curr.next;
+        }
+//   Replace the elements
+        curr = head;
+        while(curr != null){
+            if(zeroCount != 0){
+                curr.data = 0;
+                zeroCount--;
+            }else if(OneCount != 0){
+                curr.data = 1;
+                OneCount--;
+            }else if(TwoCount != 0){
+                curr.data = 2;
+                TwoCount--;
+            }
+            curr = curr.next;
+        }
+          return head;
+
+    }
+
+
+}
+
+
+
+Approach 2 :  With out Replacement of elements
+
+
+
+public class Solution
+{
+    public static Node sortList(Node head) {
+        
+         if (head == null || head.next == null) {
+            return head;
+        }
+
+        // Create three dummy nodes to represent the heads of three sublists.
+        Node zeroHead = new Node(-1);  // Head for 0s
+        Node oneHead = new Node(-1);   // Head for 1s
+        Node twoHead = new Node(-1);   // Head for 2s
+
+        // Create pointers to the tails of the three sublists.
+        Node zeroTail = zeroHead;
+        Node oneTail = oneHead;
+        Node twoTail = twoHead;
+
+        Node curr = head;
+
+        // Traverse the original list and distribute nodes into the three sublists.
+        while (curr != null) {
+            if (curr.data == 0) {
+                zeroTail.next = curr;
+                zeroTail = zeroTail.next;
+            } else if (curr.data == 1) {
+                oneTail.next = curr;
+                oneTail = oneTail.next;
+            } else {
+                twoTail.next = curr;
+                twoTail = twoTail.next;
+            }
+
+            curr = curr.next;
+        }
+
+        // Connect the sublists together.
+        zeroTail.next = oneHead.next;
+        oneTail.next = twoHead.next;
+        twoTail.next = null;
+
+        // Update the head to the sorted list.
+        head = zeroHead.next;
+
+        return head;
+    }
+
+
+}
