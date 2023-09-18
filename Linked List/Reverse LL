@@ -1,0 +1,34 @@
+class Solution {
+    public ListNode reverseList(ListNode head) {
+
+      // ListNode curr = head;
+      // ListNode prev=null;
+      // while(curr != null){
+      //     ListNode temp = curr.next;
+      //     curr.next = prev;
+
+      //     prev= curr;
+      //     curr=temp;
+      // }
+      // return prev;
+        
+        
+        
+         // Recursion
+      if(head==null || head.next==null){
+        return head;
+      }
+
+      ListNode temp= reverseList(head.next);
+      // ListNode temp1= head.next;
+      // temp1.next= head;
+        head.next.next=head;
+        head.next=null;
+
+      return temp;
+        
+     
+    }   
+    
+    
+}
