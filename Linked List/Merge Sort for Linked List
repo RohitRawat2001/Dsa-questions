@@ -1,0 +1,67 @@
+T.C = O(N Log N)  
+S.C = O(N Log N)
+
+
+class Solution {
+
+    // Find the middle of a linked list
+    static Node findMid(Node head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        Node slow = head;
+        Node fast = head.next;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        return slow;
+    }
+
+    // Merge two sorted linked lists
+    static Node merge(Node left, Node right) {
+        Node dummy = new Node(-1);
+        Node temp = dummy;
+
+        while (left != null && right != null) {
+            if (left.data < right.data) {
+                temp.next = left;
+                left = left.next;
+            } else {
+                temp.next = right;
+                right = right.next;
+            }
+            temp = temp.next;
+        }
+
+        // Connect any remaining nodes
+        if (left != null) {
+            temp.next = left;
+        } else if (right != null) {
+            temp.next = right;
+        }
+
+        return dummy.next;
+    }
+
+    // Merge sort for a linked list
+    public static Node mergeSort(Node head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        Node mid = findMid(head);
+
+        Node left = head;
+        Node right = mid.next;
+        mid.next = null;
+
+        left = mergeSort(left);
+        right = mergeSort(right);
+
+        return merge(left, right);
+    }
+}
