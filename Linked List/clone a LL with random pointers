@@ -1,0 +1,133 @@
+//  t.C = O(n)  S.C = O(1)
+
+// arb = random pointer
+
+class Clone {
+    // Function to clone a linked list with next and random pointer.
+    public static Node copyList(Node head) {
+        if (head == null) {
+            return null;
+        }
+
+        Node curr = head;
+
+        // First pass: Insert new nodes after each original node
+        while (curr != null) {
+            Node temp = curr.next;
+            curr.next = new Node(curr.data);
+            curr.next.next = temp;
+            curr = temp;
+        }
+
+        curr = head;
+
+        // Second pass: Assign random pointers for the new nodes
+        while (curr != null) {
+            if (curr.next != null) {
+                curr.next.arb = (curr.arb != null) ? curr.arb.next : null;
+                curr = curr.next.next;
+            } else {
+                break; // Exit the loop if we reach the end of the original list
+            }
+        }
+
+        Node original = head;
+        Node copyHead = head.next;
+        Node copy = copyHead;
+
+        // Third pass: Separate the original and copied lists
+        while (original != null) {
+            original.next = original.next.next;
+            if (copy.next != null) {
+                copy.next = copy.next.next;
+            }
+            original = original.next;
+            copy = copy.next;
+        }
+
+        return copyHead;
+    }
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+// using map 
+
+// T.C = O(N)  S.C = O(N)    extra space
+
+
+class Clone {
+    //Function to clone a linked list with next and random pointer.
+         public static Node copyList(Node head) {
+        if (head == null) {
+            return null;
+        }
+
+        // Create a mapping of original nodes to their corresponding new nodes.
+        Map<Node, Node> oldToNewNodeMapping = new HashMap<>();
+        
+        // First pass: Create new nodes and map original nodes to new nodes.
+        Node originalNode = head;
+        while (originalNode != null) {
+            oldToNewNodeMapping.put(originalNode, new Node(originalNode.data));
+            originalNode = originalNode.next;
+        }
+
+        // Second pass: Assign next and arb pointers for the new nodes.
+        originalNode = head;
+        while (originalNode != null) {
+            Node newNode = oldToNewNodeMapping.get(originalNode);
+            newNode.next = oldToNewNodeMapping.get(originalNode.next);
+            newNode.arb = oldToNewNodeMapping.get(originalNode.arb);
+            originalNode = originalNode.next;
+        }
+
+        return oldToNewNodeMapping.get(head);
+    }
+}
+
+
+
+/////// ----------------->>>>>>  Explain line by line using map 
+
+
+
+ 1.       Map<Node, Node> oldToNewNodeMapping = new HashMap<>();
+Here, a HashMap called oldToNewNodeMapping is created. This map will be used to associate original nodes from the input linked list with their corresponding new nodes in the cloned list. It is essentially used to keep track of which original node corresponds to which new node during the cloning process.
+
+        // First pass: Create new nodes and map original nodes to new nodes.
+ 2.       Node originalNode = head;
+        while (originalNode != null) {
+This loop begins the first pass through the input linked list. It initializes a Node called originalNode with the head of the input list and enters a loop that continues until originalNode becomes null. This loop is used to create new nodes for each original node and establish the mapping between them.
+
+  3.          oldToNewNodeMapping.put(originalNode, new Node(originalNode.data));
+Within the loop, for each originalNode, a new Node is created with the same data value as the original node, and this new node is added to the oldToNewNodeMapping map. This associates the original node with its corresponding new node.
+
+ 4.           originalNode = originalNode.next;
+        }
+After creating the new node and adding it to the map, the originalNode is updated to point to the next node in the original list, so the loop can process the next node in the next iteration.
+
+  5.      // Second pass: Assign next and arb pointers for the new nodes.
+        originalNode = head;
+        while (originalNode != null) {
+After the first pass is completed, this section starts the second pass through the input linked list. Again, it initializes originalNode with the head of the input list and enters a loop that continues until originalNode becomes null. This loop is used to set the next and arb pointers of the new nodes.
+
+  6.          Node newNode = oldToNewNodeMapping.get(originalNode);
+For each originalNode, this line retrieves the corresponding new node from the oldToNewNodeMapping map and assigns it to the variable newNode. This newNode represents the new node that corresponds to the current originalNode.
+
+  7.          newNode.next = oldToNewNodeMapping.get(originalNode.next);
+            newNode.arb = oldToNewNodeMapping.get(originalNode.arb);
+These two lines set the next and arb pointers of the newNode based on the mappings stored in the oldToNewNodeMapping map. The newNode.next is set to the new node that corresponds to the originalNode.next, and newNode.arb is set to the new node that corresponds to the originalNode.arb.
+8.
+            originalNode = originalNode.next;
+        }
+After updating the next and arb pointers for the current newNode, the originalNode is updated to point to the next node in the original list, so the loop can process the next node in the next iteration.
+
+  9.      return oldToNewNodeMapping.get(head);
+    }
+}
+Finally, after both passes are completed and all new nodes have been created and linked together with appropriate next and arb pointers, the method returns the new head node, which corresponds to the head of the cloned linked list. This is retrieved from the oldToNewNodeMapping map using the original head as the key.
+
+
+
