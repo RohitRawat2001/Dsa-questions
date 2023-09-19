@@ -1,0 +1,62 @@
+class Solution
+{
+    
+    Node middle(Node head){
+        if(head == null || head.next == null){
+            return head;
+        }
+        
+        Node slow = head;
+        Node fast = head.next;
+        
+        while(fast != null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        return slow;
+        
+    }
+    
+    Node reverse(Node head){
+          if(head == null || head.next == null){
+            return head;
+        }
+        
+        Node curr = head;
+        Node prev = null;
+        
+        while(curr != null){
+            Node forward = curr.next;
+            curr.next  = prev;
+            
+            prev = curr;
+            curr = forward;
+        }
+        return prev;
+    }
+    //Function to check whether the list is palindrome.
+
+    boolean isPalindrome(Node head) 
+    {
+        //Your code here
+        
+        if(head == null || head.next == null){
+            return true;
+        }
+        
+        Node mid = middle(head);
+        Node last = reverse(mid.next);
+        Node curr = head;
+        
+        while(last != null){
+            if(curr.data != last.data){
+                return false;
+            }else{
+                last = last.next;
+                curr = curr.next;
+            }
+        }
+        return true;
+    }    
+}
+
