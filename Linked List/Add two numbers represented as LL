@@ -1,0 +1,97 @@
+T.C,S.C = O(max(m,n))
+
+
+class Solution{
+    
+    static Node reverse(Node head){
+        if(head == null || head.next == null){
+            return head;
+        }
+        Node curr = head;
+        Node prev = null;
+        
+        while(curr != null){
+            Node forward = curr.next;
+             curr.next = prev;
+             
+             prev = curr;
+             curr = forward;
+        }
+        return prev;
+    }
+    //Function to add two numbers represented by linked list.
+    static Node addTwoLists(Node first, Node second){
+        // code here
+        // return head of sum list
+        Node dummy = new Node(-1);
+        Node temp = dummy;
+        
+       Node list1 = reverse(first);
+       Node list2  = reverse(second);
+       
+       int carry = 0;
+       while(list1 != null || list2 != null || carry !=0){
+           
+           int sum=0;
+           if(list1 != null){
+               sum += list1.data;
+               list1 = list1.next;
+           }
+           if(list2 != null){
+               sum += list2.data;
+               list2 = list2.next;
+           }
+           
+           sum += carry;
+           carry = sum/10;
+           temp.next = new Node(sum%10);
+           temp = temp.next;
+           
+       }
+       return reverse(dummy.next);
+     }
+}
+
+
+
+working :
+
+rhead1 ====== list1
+
+1. static Node addTwoLists(Node first, Node second){: This line defines a static function called addTwoLists that takes two Node parameters, first and second, and returns a Node.
+
+2. Node newNode =new Node(-1);: Creates a new Node newNode with a value of -1. This is used to simplify the addition process and will not be part of the final result.
+
+3. Node temp=newNode;: Initializes a Node temp to newNode. temp will be used to build the result linked list.
+
+4. Node rhead1=reverse(first);: Calls the reverse function to reverse the first linked list and stores the result in rhead1.
+
+5. Node rhead2=reverse(second);: Calls the reverse function to reverse the second linked list and stores the result in rhead2.
+
+6. int carry=0;: Initializes an integer variable carry to 0 to keep track of any carry during addition.
+
+7. while(rhead1!=null || rhead2!=null || carry==1){: Starts a while loop that continues as long as rhead1 or rhead2 still has digits to process, or there is a carry (carry==1) from the previous addition.
+
+8. Inside the loop:
+
+int sum=0;: Initializes an integer variable sum to 0 to calculate the sum of digits in the current position.
+
+if(rhead1!=null){: Checks if there are more digits in rhead1 to add.
+
+sum+=rhead1.data;: Adds the current digit from rhead1 to sum.
+rhead1=rhead1.next;: Moves to the next digit in rhead1.
+if(rhead2!=null){: Checks if there are more digits in rhead2 to add.
+
+sum+=rhead2.data;: Adds the current digit from rhead2 to sum.
+rhead2=rhead2.next;: Moves to the next digit in rhead2.
+sum+=carry;: Adds any carry from the previous addition to sum.
+
+9. carry=sum/10;: Calculates the new carry by dividing sum by 10.
+
+10. temp.next=new Node(sum%10);: Creates a new Node with a value equal to the remainder of sum divided by 10 and attaches it to the temp.next.
+
+11. temp=temp.next;: Moves temp to the newly added node to prepare for the next iteration.
+
+12. After the loop, the result is in newNode.next, but it's in reverse order, so it calls the reverse function one more time to reverse it.
+
+Finally, it returns the head of the reversed linked list, which represents the sum of the two input linked lists.
