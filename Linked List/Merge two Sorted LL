@@ -1,4 +1,4 @@
-
+Approach 1 :  Both T.C = O(n)  S.C = O(1)
 
 class Solution {
 
@@ -50,5 +50,46 @@ ListNode solve(ListNode list1, ListNode list2){
             return solve(list2,list1);
         }
         
+    }
+}
+
+
+
+More optimize 
+
+class LinkedList
+{
+    
+      Node sortedMerge(Node head1, Node head2) {
+        if (head1 == null) {
+            return head2;
+        }
+        if (head2 == null) {
+            return head1;
+        }
+
+        // Initialize a dummy node as the merged list's head.
+        Node dummy = new Node(-1);
+        Node tail = dummy;
+
+        while (head1 != null && head2 != null) {
+            if (head1.data <= head2.data) {
+                tail.next = head1;
+                head1 = head1.next;
+            } else {
+                tail.next = head2;
+                head2 = head2.next;
+            }
+            tail = tail.next;
+        }
+
+        // Attach any remaining nodes from both lists (if any).
+        if (head1 != null) {
+            tail.next = head1;
+        } else {
+            tail.next = head2;
+        }
+
+        return dummy.next; // Return the merged list (skip the dummy node).
     }
 }
