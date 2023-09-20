@@ -1,0 +1,17 @@
+T.C = O(N)  S.C = O(1)
+
+class Solution {
+    public Stack<Integer> insertAtBottom(Stack<Integer> St, int X) {
+        
+       if (St.isEmpty()) {
+            St.push(X);
+        } else {
+            int top = St.pop();
+            insertAtBottom(St, X);
+            St.push(top);
+        }
+        return St;
+    }
+}
+
+
