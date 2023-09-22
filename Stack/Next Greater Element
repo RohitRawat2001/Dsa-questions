@@ -1,0 +1,31 @@
+
+T.C = O(N)   S.C = O(N)
+
+
+class Solution{
+    public static long[] nextLargerElement(long[] arr, int n){
+        Stack<Long> s = new Stack<>();
+        long[] ans = new long[n];
+
+        // Initialize the stack with -1 at the bottom to handle edge cases
+        s.push(-1L); // Push as a long
+
+        for (int i = n - 1; i >= 0; i--) {
+            long curr = arr[i];
+
+            // Pop elements from the stack until we find a greater element or the stack is empty.
+            while (!s.isEmpty() && s.peek() <= curr) {
+                s.pop();
+            }
+
+            // If the stack is empty, there is no greater element to the right.
+            // Otherwise, the top element of the stack is the next greater element.
+            ans[i] = s.isEmpty() ? -1 : s.peek();
+
+            // Push the current element onto the stack for future comparisons.
+            s.push(curr);
+        }
+
+        return ans;
+    } 
+}
