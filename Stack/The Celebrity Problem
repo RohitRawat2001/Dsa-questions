@@ -1,0 +1,67 @@
+
+class Solution
+{ 
+    //Function to find if there is a celebrity in the party or not.
+      boolean knows(int[][] M, int a, int b) {
+        return M[a][b] == 1;
+    }
+
+    // Function to find if there is a celebrity in the party or not.
+    int celebrity(int[][] M, int n) {
+        Stack<Integer> s = new Stack<>();
+
+        // Push all people onto the stack
+        for (int i = 0; i < n; i++) {
+            s.push(i);
+        }
+
+        // Pop off two people at a time until only one person remains
+        while (s.size() > 1) {
+            int a = s.pop();
+            int b = s.pop();
+
+            if (knows(M, a, b)) {
+                // If a knows b, a cannot be the celebrity, but b could be.
+                s.push(b);
+            } else {
+                // If a doesn't know b, b cannot be the celebrity, but a could be.
+                s.push(a);
+            }
+        }
+
+        int ans = s.peek();
+
+    //   // Verify if the potential celebrity is actually a celebrity
+    //     for (int i = 0; i < n; i++) {
+    //         if (i != potentialCelebrity && (knows(M, potentialCelebrity, i) || !knows(M, i, potentialCelebrity))) {
+    //             // The potential celebrity knows someone else or is not known by everyone.
+    //             return -1;
+    //         }
+    //     }
+     int zeroCount = 0;
+        
+        for(int i=0; i<n; i++) {
+            if(M[ans][i] == 0)
+                zeroCount++;
+        }
+        
+        //all zeroes
+        if(zeroCount != n)
+            return -1;
+        
+        //column check
+        int oneCount = 0;
+        
+        for(int i=0; i<n; i++) {
+            if(M[i][ans] == 1)
+                oneCount++;
+        }
+        
+        if(oneCount != n-1)
+            return -1;
+        
+        return ans;
+
+        // return potentialCelebrity;
+    }
+}
