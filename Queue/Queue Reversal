@@ -1,0 +1,21 @@
+T.C = O(N)  S.C = O(N)
+
+class GfG{
+   
+    public Queue<Integer> rev(Queue<Integer> q){
+   
+        Stack<Integer> s = new Stack<>();
+        while(!q.isEmpty()){
+            int element = q.poll();
+            s.push(element);
+        }
+        
+        while(!s.isEmpty()){
+            int element = s.pop();
+            q.offer(element);
+        }
+        return q;
+    }
+}
+
+
