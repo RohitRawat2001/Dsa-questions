@@ -19,3 +19,22 @@ class GfG{
 }
 
 
+
+//Using Recursion not for large dataset
+
+class GfG{
+  
+    public Queue<Integer> rev(Queue<Integer> q){
+     
+         if (q.isEmpty()) {
+            return q;              // Base case: if the queue is empty, nothing to reverse.
+        } else {
+            int top = q.poll();           // Remove the front element.
+            q = rev(q);           // Recursively reverse the remaining elements.
+            q.offer(top);               // Add the current element to the rear.
+            return q;
+        }
+    }
+    
+}
+
