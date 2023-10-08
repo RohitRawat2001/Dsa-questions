@@ -1,0 +1,81 @@
+class Solution {
+    // Recursion 
+    public int solve(int index, int buy,int[] prices){
+        if(index == prices.length){
+            return 0;   
+        }
+        
+        int profit = 0;
+        if(buy == 1){
+            int buykaro = -prices[index] + solve(index+1,0,prices);
+            int skipkaro = 0 + solve(index+1,1,prices);
+            profit = Math.max(buykaro,skipkaro);
+        }else{
+            int Sellkaro = +prices[index] + solve(index+1,1,prices);
+            int skipkaro = 0 + solve(index+1,0,prices);
+            profit = Math.max(Sellkaro,skipkaro);
+        }
+        return profit;
+    }
+   -------------------------------------------------------------------------------------------------------------------------------------- 
+    // Memoization + Recursion
+    public int solve(int index, int buy, int[] prices, int[][] dp) {
+        if (index == prices.length) {
+            return 0;
+        }
+
+        // If the result is already computed, return it from the memo table
+        if (dp[index][buy] != -1) {
+            return dp[index][buy];
+        }
+
+        int profit = 0;
+        if (buy == 1) {
+            int buykaro = -prices[index] + solve(index + 1, 0, prices, dp);
+            int skipkaro = solve(index + 1, 1, prices, dp);
+            profit = Math.max(buykaro, skipkaro);
+        } else {
+            int sellkaro = prices[index] + solve(index + 1, 1, prices, dp);
+            int skipkaro = solve(index + 1, 0, prices, dp);
+            profit = Math.max(sellkaro, skipkaro);
+        }
+
+        // Store the computed result in the memo table
+        dp[index][buy] = profit;
+
+        return profit;
+    }
+
+    public int maxProfit(int[] prices) {
+        int n = prices.length;
+        // Create a memoization table (or DP table) to store computed results
+        int[][] dp = new int[n][2];
+
+        // Initialize the memoization table with -1 to indicate uncomputed values
+        for (int i = 0; i < n; i++) {
+            dp[i][0] = -1;
+            dp[i][1] = -1;
+        }
+
+        // Call the recursive function with initial parameters
+        return solve(0, 1, prices, dp);
+    }
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+// Best code fully optimisied
+
+
+class Solution {
+    public int maxProfit(int[] prices) {
+          int profit = 0;
+        for(int i=1;i<prices.length;i++) {
+            if(prices[i] > prices[i-1]) {
+                profit += prices[i] - prices[i-1];
+            }
+        }
+        return profit;
+    }
+}
