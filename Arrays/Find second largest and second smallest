@@ -1,0 +1,27 @@
+public class Solution {
+    public static int[] getSecondOrderElements(int n, int []a) {
+       
+        int largest = Integer.MIN_VALUE;
+        int second_largest = Integer.MIN_VALUE;
+
+        int smallest = Integer.MAX_VALUE;
+        int second_smallest = Integer.MAX_VALUE;
+
+        for (int i = 0; i < n; i++) {
+            if (a[i] > largest) {
+                second_largest = largest;
+                largest = a[i];
+            } else if (a[i] > second_largest && a[i] != largest) {
+                second_largest = a[i];
+            }
+
+            if (a[i] < smallest) {
+                second_smallest = smallest;
+                smallest = a[i];
+            } else if (a[i] < second_smallest && a[i] != smallest) {
+                second_smallest = a[i];
+            }
+        }
+        return new int[]{second_largest, second_smallest};
+    }
+}
