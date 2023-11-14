@@ -1,0 +1,98 @@
+
+// optimal solution
+
+Time Complexity: O(N), N = size of the array.
+Reason: We have used 2 loops and using those loops, we are basically traversing the array once.
+
+Space Complexity: O(1) as we are not using any extra space to solve this problem.
+
+class Solution {
+    public void moveZeroes(int[] nums) {
+        
+        int n = nums.length;
+        int j = -1;
+        for(int i=0;i<n;i++){
+            if(nums[i] == 0){
+                j=i;
+                break;
+            }
+        }
+        if(j == -1){
+            System.out.print(Arrays.toString(nums));
+            return;
+        }
+        
+        for(int i=j+1;i<n;i++){
+            if(nums[i] !=0){
+                int temp = nums[i];
+                nums[i] = nums[j];
+                nums[j] = temp;
+                j++;
+            }
+        }
+         System.out.print(Arrays.toString(nums));
+    }
+}
+
+
+
+...............................................................................................................................................
+
+
+// brute force  t.c = 2N
+
+public class Solution {
+       public static int[] moveZeros(int n, int[] a) {
+        ArrayList<Integer> temp = new ArrayList<>();
+        
+        // Separate non-zero elements and store them in 'temp'
+        for (int i = 0; i < n; i++) {
+            if (a[i] != 0) {
+                temp.add(a[i]);
+            }
+        }
+        
+        // Fill the original array with non-zero elements
+        for (int i = 0; i < temp.size(); i++) {
+            a[i] = temp.get(i);
+        }
+        
+        // Fill the remaining positions with zeros
+        for (int i = temp.size(); i < n; i++) {
+            a[i] = 0;
+        }
+        
+        return a;
+
+
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
