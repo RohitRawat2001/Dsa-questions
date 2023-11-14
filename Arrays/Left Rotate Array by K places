@@ -1,0 +1,54 @@
+
+
+
+
+// using Arraylist 
+import java.util.ArrayList;
+
+public class Solution {
+
+    public static ArrayList<Integer> rotateArray(ArrayList<Integer> arr, int k) {
+        if (arr == null || arr.isEmpty()) {
+            return arr;
+        }
+
+        int n = arr.size();
+        k = k % n;
+
+        reverse(arr, 0, k - 1);
+        reverse(arr, k, n - 1);
+        reverse(arr, 0, n - 1);
+
+        return arr;
+    }
+
+    private static void reverse(ArrayList<Integer> arr, int start, int end) {
+        while (start < end) {
+            int temp = arr.get(start);
+            arr.set(start, arr.get(end));
+            arr.set(end, temp);
+            start++;
+            end--;
+        }
+    }
+
+    public static void main(String[] args) {
+        ArrayList<Integer> arr = new ArrayList<>();
+        arr.add(7);
+        arr.add(5);
+        arr.add(2);
+        arr.add(11);
+        arr.add(2);
+        arr.add(43);
+        arr.add(1);
+        arr.add(1);
+
+        int k = 2;
+
+        System.out.println("Original ArrayList: " + arr);
+
+        rotateArray(arr, k);
+
+        System.out.println("Rotated ArrayList: " + arr);
+    }
+}
