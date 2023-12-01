@@ -10,6 +10,7 @@ public class Solution
 
     int i = 0, j = 0;
 
+
     // To traverse the arrays
     while (i < n && j < m) {
         // If the current element in arr1 is smaller
