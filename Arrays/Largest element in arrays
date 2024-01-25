@@ -1,4 +1,3 @@
-
 public class Solution {
     static int largestElement(int[] arr, int n) {
 type 1
