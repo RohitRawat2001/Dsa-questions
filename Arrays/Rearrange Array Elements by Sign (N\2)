@@ -1,0 +1,55 @@
+//brute force  T. C = O(2N)
+
+class Solution {
+    public int[] rearrangeArray(int[] nums) {
+        int n = nums.length;
+        
+        // Separate positive and negative numbers into two arrays
+        int[] pos = new int[n/2];
+        int[] neg = new int[n/2];
+        
+        int indexPos = 0;
+        int indexNeg = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (nums[i] < 0) {
+                neg[indexNeg++] = nums[i];
+            } else {
+                pos[indexPos++] = nums[i];
+            }
+        }
+        
+        // Rearrange the original array with alternating positive and negative numbers
+        int index = 0;
+        for (int i = 0; i < n/2; i++) {
+            nums[index++] = pos[i];
+            nums[index++] = neg[i];
+        }
+        
+        return nums;
+    }
+}
+
+ 
+// optimal solution
+class Solution {
+    public int[] rearrangeArray(int[] nums) {
+        int n = nums.length;
+        int pos = 0; int neg = 1;
+         
+        int[] arr = new int[n];
+        
+        for(int i=0;i<n;i++){
+            if(nums[i] < 0){
+                arr[neg] = nums[i];
+                neg += 2;
+            }else{
+                arr[pos] = nums[i];
+                pos +=2;
+            }
+        }
+        return arr;
+    }
+}
+
+T.C = O(N)  S.C = O(N)
