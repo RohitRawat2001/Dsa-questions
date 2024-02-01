@@ -1,4 +1,3 @@
-
 public class Solution {
     public static int longestSubarrayWithSumK(int []a, long k) {
         // Write your code here
