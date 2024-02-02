@@ -1,3 +1,4 @@
+
 public class Solution {
     public static int majorityElement(int []v) {
         // Write your code here
