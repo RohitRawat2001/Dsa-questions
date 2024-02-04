@@ -1,0 +1,23 @@
+import java.util.*;
+public class Solution {
+
+    public static List< Integer > superiorElements(int []a) {
+
+        int n=a.length;
+        // Write your code here.
+        ArrayList<Integer> ans= new ArrayList<>();
+
+        // last element 
+        int maxi=a[n-1];
+
+        ans.add(a[n-1]);
+
+        for(int i=n-2;i>=0;i--){
+            if(a[i]>maxi){
+                ans.add(a[i]);
+                maxi=a[i];
+            }   
+        }
+        return ans;    
+    }
+}
