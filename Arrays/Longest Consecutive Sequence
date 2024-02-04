@@ -1,0 +1,23 @@
+import java.util.HashSet;
+
+public class Solution {
+    public static int longestSuccessiveElements(int []a) {
+        int n = a.length;
+        HashSet<Integer> hs = new HashSet<>();
+        for(int i = 0; i< n; i++){
+            hs.add(a[i]);
+        }
+        int long_length = 0;
+        for(int i = 0;i<n;i++){
+            if(!hs.contains(a[i]-1)){
+                int no = a[i];
+                while(hs.contains(no)){
+                    no++;
+                }
+                if(long_length < no - a[i])
+                long_length = no - a[i];
+            }
+        }
+        return long_length;
+    }
+}
