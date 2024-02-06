@@ -1,0 +1,34 @@
+import java.util.Arrays;
+
+public class Solution {
+    public void setZeroes(int[][] matrix) {
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+
+        int[] row = new int[rows];
+        int[] col = new int[cols];
+
+        // Traverse the matrix:
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (matrix[i][j] == 0) {
+                    // mark ith index of row with 1:
+                    row[i] = 1;
+
+                    // mark jth index of col with 1:
+                    col[j] = 1;
+                }
+            }
+        }
+
+        // Finally, mark all (i, j) as 0
+        // if row[i] or col[j] is marked with 1.
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (row[i] == 1 || col[j] == 1) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+    }
+}
