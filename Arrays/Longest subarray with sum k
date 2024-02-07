@@ -19,7 +19,81 @@ public class Solution {
     }
 }
 
-// optimal solution for positive elements 
+// hashMap optimal solution.......................................................................................................................................
+
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+	public static int getLongestSubarray(int []nums, int k) {
+	HashMap<Integer, Integer> preSumMap = new HashMap<>();
+
+ 
+
+        //initialize variables to store current sum and max length of subarray
+
+        int sum = 0;
+
+        int maxLen = 0;
+
+ 
+
+        for (int i = 0; i < nums.length; i++) {
+
+            sum += nums[i];
+
+ 
+
+            //check if the current sum equals sum k
+
+            if (sum == k) {
+
+                //update maximum length with the current index + 1
+
+                maxLen = Math.max(maxLen, i + 1);
+
+            }
+
+ 
+
+            //calculate the remainder needed to reach the target sum k
+
+            int rem = sum - k;
+
+ 
+
+            //if the remainder exists in the prefix sum map
+
+            if (preSumMap.containsKey(rem)) {
+
+                //calculate the length of the subarray that equals k
+
+                int len = i - preSumMap.get(rem);
+
+                maxLen = Math.max(maxLen, len);
+
+            }
+
+ 
+
+            //if the current sum does not exist in the prefix sum map
+
+            if (!preSumMap.containsKey(sum)) {
+
+                //store the current sum and its index in the map
+
+                preSumMap.put(sum, i);
+
+            }
+
+        }
+
+        return maxLen;
+
+    }
+	
+}
+
+// optimal solution for positive elements ........................................................................................................
 
 public class Main {
     public static int getLongestSubarray(int []a, long k) {
