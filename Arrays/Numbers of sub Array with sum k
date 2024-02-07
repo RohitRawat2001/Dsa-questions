@@ -16,3 +16,32 @@ class Solution {
         
     }
 }
+
+// optimal solution................................................................................
+
+class Solution {
+    public int subarraySum(int[] nums, int k) {
+         int n = nums.length;
+        HashMap<Integer, Integer> mpp = new HashMap<>();
+        int count = 0;
+        int sum = 0;
+
+        mpp.put(0, 1); // Initialize with 0 sum to handle subarrays starting from index 0
+        for (int i = 0; i < n; i++) {
+            sum += nums[i];
+
+            // Calculate the sum we need to remove to get k
+            int remove = sum - k;
+
+            // Check if we have seen this complement before
+            if (mpp.containsKey(remove)) {
+                // Increment count by the number of times the complement has occurred
+                count += mpp.get(remove);
+            }
+
+            // Update the frequency of current sum
+            mpp.put(sum, mpp.getOrDefault(sum, 0) + 1);
+        }
+        return count;
+    }
+}    
