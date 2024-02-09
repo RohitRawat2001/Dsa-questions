@@ -1,0 +1,50 @@
+// optimal solution using moore's voting algorithms same as majority elements n/2 
+
+import java.util.*;
+public class Solution {
+    public static List< Integer > majorityElement(int []v) {
+           int n = v.length;
+
+           int count1 = 0;
+           int element1 = Integer.MIN_VALUE;
+           int count2 = 0;
+           int element2 = Integer.MIN_VALUE;
+
+           for(int i = 0 ; i < n ;i++){
+               if(count1 == 0 && element2 != v[i]){
+                   count1 = 1;
+                   element1 = v[i];
+               }else if(count2 == 0 && element1 != v[i]){
+                    count2 = 1;
+                   element2 = v[i];
+               }else if(element1 == v[i]) {
+                   count1++;
+               }else if (element2 == v[i]){
+                   count2++;
+               }else{
+                   count1--;
+                   count2--;
+               }
+           }
+           ArrayList<Integer> list = new ArrayList<>();
+           count1 = 0 ; count2 = 0;
+
+           for(int i = 0 ;i< n;i++){
+               if(element1 == v[i]){
+                   count1++;
+               }
+               if(element2 == v[i]){
+                   count2++;
+               }
+           }
+           int mini = (int)(n/3)+1;
+           if(count1 >= mini){
+               list.add(element1);
+           }
+           if(count2 >= mini){
+               list.add(element2);
+           }
+       return list;
+    }
+    
+}
