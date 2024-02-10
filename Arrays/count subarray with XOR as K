@@ -1,0 +1,21 @@
+T.C = O(N^2)
+
+public class Solution {
+    public static int subarraysWithSumK(int []a, int b) {
+        int n = a.length;
+        int count = 0;
+        for(int i = 0 ;i<n;i++){
+            int xor = 0;
+         for(int j = i;j<n;j++){
+              xor ^= a[j];
+
+              if(b == xor){
+                  count++;
+              }
+         }
+        }
+        return count;
+    }
+}
+
+//optimal using hashmap
