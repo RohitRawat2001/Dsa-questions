@@ -1,0 +1,30 @@
+public class Solution {
+    public static int[] findMissingRepeatingNumbers(int []a) {
+        long n = a.length;
+         // find Sn and S2n
+        long Sn = (n *(n+1))/2;
+        long S2n = (n*(n+1)*(2*n+1))/6;
+
+  //calculate S and S2
+        long S = 0;
+        long S2 = 0;
+        for(int i = 0; i < n ;i++){
+            S += a[i];
+            S2 += (long)a[i] * (long)a[i];
+        }
+
+  // S-Sn = x-y
+        long val1 = S-Sn;
+        long val2 = S2 - S2n;
+
+//find x+y = (x^2 - y^2)/(x-y)
+        val2 = val2/val1;
+
+//find x and y : x = ((x+y)+(x-y))/2 and y = x-(x-y)
+        long x = (val1 + val2)/2;
+        long y = x - val1;
+
+        int[] ans = {(int)x , (int)y};
+        return ans; 
+     }
+}
