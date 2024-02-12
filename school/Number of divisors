@@ -1,0 +1,35 @@
+Given an integer N, find the number of divisors of N that are divisible by 3.
+ 
+
+Example 1:
+
+Input : 6
+Output: 2
+Explanation: 1, 2, 3, 6 are divisors 
+of 6 out of which 3 and 6 are divisible 
+by 3.
+
+class Solution{
+    static long count_divisors(int N){
+      long count=0;
+        ArrayList<Integer>list=new ArrayList<>();
+        for (int i=1; i<=Math.sqrt(N); i++){
+            if (N%i==0){
+                if (N/i == i){
+                    list.add(i);
+                }
+                else{
+                    list.add(i);
+                    list.add(N/i);
+                }
+            }
+        }
+        for(int i:list ){
+            if(i%3==0){
+                count++;
+            }
+        }
+        return count;
+    
+    }
+}
