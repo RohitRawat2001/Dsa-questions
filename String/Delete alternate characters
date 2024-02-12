@@ -1,0 +1,23 @@
+Given a string S as input. Delete the characters at odd indices of the string.
+
+Example 1:
+
+Input: S = "Geeks"
+Output: "Ges" 
+Explanation: Deleted "e" at index 1
+and "k" at index 3.
+
+
+class Solution {
+    static String delAlternate(String S) {
+        
+      StringBuilder sb = new StringBuilder(S);
+      
+        for (int i = sb.length() - 1; i >= 0; i--) {
+            if (i % 2 != 0) {
+                sb.deleteCharAt(i);
+            }
+        }
+        return sb.toString();
+    }
+}
