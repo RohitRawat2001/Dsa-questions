@@ -1,0 +1,75 @@
+//brute force solution n^2
+class Solution {
+    
+    public int reversePairs(int[] nums) {
+        int n = nums.length;
+                  int count = 0;
+        for(int i = 0;i<n;i++){
+            for(int j = i+1;j<n;j++){
+                if(nums[i] > 2*nums[j]){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+}
+
+nlogn
+// optimal solution 
+class Solution {
+     static void merge(int arr[], int l, int m, int r)
+    {
+        int temp[] = new int[r - l + 1];
+        int left = l;
+        int right = m + 1;
+        int index = 0;
+
+        while (left <= m && right <= r) {
+            if (arr[left] <= arr[right]) {
+                temp[index++] = arr[left++];
+            } else {
+                temp[index++] = arr[right++];
+            }
+        }
+
+        while (left <= m) {
+            temp[index++] = arr[left++];
+        }
+        while (right <= r) {
+            temp[index++] = arr[right++];
+        }
+
+        for (int i = l; i <= r; i++) {
+            arr[i] = temp[i - l];
+        }
+    }
+
+    static int countPair(int arr[], int mid, int low, int high) {
+        int right = mid + 1;
+        int cnt = 0;
+        for (int i = low; i <= mid; i++) {
+            while (right <= high && arr[i] > 2 * (long)arr[right]) right++;
+            cnt += (right - (mid + 1));
+        }
+        return cnt;
+    }
+
+    static int mergeSort(int arr[], int l, int r) {
+        int cnt = 0;
+        if (l >= r) return cnt;
+            int mid = l + (r - l) / 2;
+
+            cnt += mergeSort(arr, l, mid);
+            cnt += mergeSort(arr, mid + 1, r);
+            cnt += countPair(arr, mid, l, r); // Modify this line
+            merge(arr, l, mid, r);
+    
+        return cnt;
+    }
+
+    public int reversePairs(int[] nums) {
+        int n = nums.length;
+          return mergeSort(nums, 0, n - 1);
+    }
+}
