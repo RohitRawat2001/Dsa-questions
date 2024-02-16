@@ -1,0 +1,47 @@
+
+public class Solution {
+    public static Node deleteLast(Node list){   // list = head
+    if(list.next == null){
+        list = null;
+        return list;
+    }
+        Node currNode = list;
+        Node lastNode = list.next;
+        while(lastNode.next != null){
+            currNode = currNode.next;
+            lastNode = lastNode.next;
+        }
+        currNode.next = null;
+       return list;
+    }
+}
+
+...............................................................................................
+second way
+................................................................................................
+
+public class Solution {
+
+    public static Node deleteLast(Node list){
+
+        if(list==null || list.next==null){
+
+            return null;
+
+        }
+
+        Node curr=list;
+
+        while(curr.next.next!=null){
+
+            curr=curr.next;
+
+        }
+
+        curr.next=null;
+
+        return list;
+
+    }
+
+}
