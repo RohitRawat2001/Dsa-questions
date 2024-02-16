@@ -1,0 +1,14 @@
+public class Solution
+{
+    public static int searchInLinkedList(Node head, int k)
+    {
+          Node curr = head;
+        while (curr != null) {
+            if (curr.data == k) {
+                return 1;
+            }
+            curr = curr.next;
+        }
+        return 0;
+    }
+}
