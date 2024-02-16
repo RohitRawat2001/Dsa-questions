@@ -1,0 +1,17 @@
+public class Solution {
+    public static Node insertEnd(Node head, int k) {
+        Node newNode = new Node(k);  // Create a new node with the given value
+
+        if (head == null) {
+            // If the list is empty, the new node becomes the head
+            return newNode;
+        }
+
+        Node currNode = head;
+        while (currNode.next != null) {
+            currNode = currNode.next;
+        }
+        currNode.next = newNode;
+        return head; // Return the head (unchanged)
+    }
+}
