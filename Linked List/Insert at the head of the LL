@@ -1,0 +1,13 @@
+public class Solution
+{
+    public static Node insertAtFirst(Node list, int newValue) {  //list = head
+         Node newNode = new Node(newValue);
+         if(list == null){
+             list = newNode;
+             return list;
+         }
+         newNode.next = list;
+         list = newNode;
+         return list;
+    }
+}
