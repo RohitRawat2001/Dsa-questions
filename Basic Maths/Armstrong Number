@@ -1,0 +1,29 @@
+class Solution {
+    public static boolean Arm(int n){
+        int originalNo=n;
+        int count=0;
+        int temp1=n;
+        while(temp1>0){
+            count++;
+            temp1=temp1/10;
+        }
+        int sumofPower = 0;
+        int temp2=n;
+        
+        while(temp2>0){
+            int lastdigit = temp2 % 10;
+            sumofPower += Math.pow(lastdigit,count);
+            temp2=temp2/10;
+        }
+        return (sumofPower == originalNo);
+    }
+    
+    static String armstrongNumber(int n){
+        // code here
+     if(Arm(n)){
+        return "Yes";
+     }else{
+        return "No";
+     }
+    }
+}
