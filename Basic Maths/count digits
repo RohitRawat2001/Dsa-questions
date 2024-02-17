@@ -1,0 +1,26 @@
+public class Solution {
+    public static int countDigits(int n){
+      
+      solution 1  //t.c = O(n)
+
+    //  int count = 0;
+    //  while(n > 0){
+    //      int lastdigit = n % 10;
+    //      count++;
+    //      n = n/10;
+    //  }
+    //  return count;
+
+      solution 2 //t.c = O(1)
+
+    //  String n2 = Integer.toString(n);
+    // return n2.length();
+
+     solution 3//t.c = O(1)
+     
+    // int digit=(int)Math.floor(Math.log10(n)+1);
+    // return digit;
+        
+      
+    }
+}
