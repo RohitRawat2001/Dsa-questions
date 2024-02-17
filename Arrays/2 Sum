@@ -11,13 +11,29 @@ public class Solution {
         while(left < right){
         int sum=book[left]+book[right];
           if(sum == target){
-              return "YES";
+          return "YES";            // return new int[]{left,right};
           }else if(sum < target){
               left++;
           }else{
               right--;
           }
         }
-        return "NO";
+        return "NO";           // return new int[]{};
     }
+}
+
+using hashmap ...................................................................
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        HashMap<Integer,Integer> hm = new HashMap<>();
+       for(int i = 0 ; i < nums.length ; i++){
+           int num = nums[i];
+           int more = target - num;
+           while(hm.containsKey(more)){
+               return new int[]{hm.get(more),i};
+           }
+           hm.put(nums[i],i);
+       }
+       return new int[]{};
+    }  
 }
