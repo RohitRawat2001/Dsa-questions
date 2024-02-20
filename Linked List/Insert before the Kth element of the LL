@@ -1,0 +1,23 @@
+
+public class Solution {
+
+    static Node insert(Node head, int n, int pos, int val) {
+           Node newNode = new Node(val);
+
+        if(pos == 0){
+            newNode.next = head;
+            return newNode;
+        }
+
+        Node prev = head;
+
+        for(int i = 0; i < pos - 1; i++){
+            prev = prev.next;
+        }
+
+        newNode.next = prev.next;
+        prev.next = newNode;
+
+        return head;
+    }
+}
