@@ -1,3 +1,11 @@
+Example:
+Input: ‘N’ = 4, ‘Arr’ = [4, 2, 5, 1]
+
+Output: 4 2 5 1
+
+Explanation: Doubly Linked List for the array ‘Arr’ = [4, 2, 5, 1] is 4 <-> 2 <-> 5 <-> 1.
+
+
 public class Solution
 {
     public static Node constructDLL(int []arr) {
