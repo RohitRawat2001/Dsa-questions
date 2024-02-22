@@ -1,0 +1,13 @@
+public class Solution {
+    public static Node deleteHead(Node head) {
+        if(head == null || head.next == null){
+            return null;
+        }
+
+        Node prev = head;
+        head = head.next;
+        head.prev = null;
+        prev.next = null;
+        return head;
+    }
+}
