@@ -1,0 +1,37 @@
+Example:
+Input:
+Linked List: 1 -> 3 -> 5 -> 7
+x: 4
+val: 5
+Output:
+1 -> 3 -> 4 -> 5 -> 7
+
+Explanation:
+In the provided linked list, we insert '4' immediately before '5'.
+
+
+
+public class Solution {
+    public static Node insertBeforeValue(Node head, int x, int val) {
+         Node temp = head.next;
+        Node prev = head;
+        Node newNode = new Node(x);
+
+            //for first element to add at head of list
+        if (prev.data == val) {
+            newNode.next = prev;
+            return newNode;
+        }
+
+        while (temp != null) {
+            if (temp.data == val) {
+                newNode.next = temp;
+                prev.next = newNode;
+               
+            }
+            temp = temp.next;
+            prev = prev.next;
+        }
+        return head;
+    }
+}
