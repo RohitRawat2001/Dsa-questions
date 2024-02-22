@@ -1,4 +1,30 @@
- static Node deleteK(Node head, int k) {
+public class Solution {
+   public static Node<Integer> deleteNode( Node<Integer> head, int pos) {
+		
+         if (pos == 0) {
+            head = head.next;
+            return head;
+        }
+
+        Node<Integer> prev = head;
+        for (int i = 0; i < pos - 1 && prev != null; i++) {
+            prev = prev.next;
+        }
+        
+        if (prev == null || prev.next == null)
+            return head; // No node to delete or the position is out of bounds
+
+        prev.next = prev.next.next;
+        return head;
+    }
+}
+
+
+
+.....................................................................................................................................
+
+
+static Node deleteK(Node head, int k) {
         // Check if the list is empty
         if (head == null)
             return head;
