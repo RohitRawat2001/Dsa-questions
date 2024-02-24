@@ -2,15 +2,11 @@
 public class Solution {
     public static Node deleteNode(Node head, int k) {
          int cnt = 1;
-
         Node temp = head;
-
-
         if(k == 1){
             head = head.next;
             return head;
         }
-
         while(temp.next != null){
             if(cnt == k){
                 break;
