@@ -26,9 +26,21 @@ class Solution {
         head.next=null;
 
       return temp;
-        
-     
-    }   
-    
-    
+          
+    }      
 }
+
+
+.................................
+//recursion 
+
+		if(head==null || head.next==null){
+			return head;
+		}
+        LinkedListNode newNode= reverseLinkedList( head.next);
+		head.next.next = head;
+		head.next=null;
+		
+        return newNode;
+
+
