@@ -30,4 +30,48 @@ class Solution
     }
     
 }
+.............................................................................
 
+//leetcode pa........
+class Solution {
+    public ListNode reverseKGroup(ListNode head, int k) {
+
+           if (head == null || head.next == null || k <= 1) {
+            return head;
+        }
+
+        ListNode curr = head;
+        ListNode prev = null;
+        ListNode next = null;
+        int count = 0;
+
+        // Count the number of nodes in this segment
+        ListNode temp = head;
+        while (temp != null && count < k) {
+            temp = temp.next;
+            count++;
+        }
+
+        // If there are less than k nodes left, no need to reverse
+        if (count < k) {
+            return head;
+        }
+
+        // Reverse the current segment
+        count = 0;
+        while (curr != null && count < k) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+            count++;
+        }
+
+        // Recursively reverse the next segment
+        if (next != null) {
+            head.next = reverseKGroup(next, k);
+        }
+
+        return prev;
+    }
+}
