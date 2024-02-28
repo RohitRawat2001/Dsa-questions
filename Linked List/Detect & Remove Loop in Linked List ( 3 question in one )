@@ -1,0 +1,60 @@
+
+import java.util.ArrayList;
+
+public class Solution {
+
+    public static Node FloydDetection(Node head) {
+        if (head == null) {
+            return null;
+        }
+
+        Node slow = head;
+        Node fast = head;
+
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+
+            if (slow == fast) {
+                return slow;
+            }
+        }
+        return null;
+    }
+
+    public static Node delectFirst(Node head) {
+        if (head == null) {
+            return null;
+        }
+
+        Node meet = FloydDetection(head);
+        if (meet == null) {
+            return null; // No loop detected, return null
+        }
+
+        Node start = head;
+
+        while (start != meet) {
+            start = start.next;
+            meet = meet.next;
+        }
+        return start;
+    }
+
+    public static Node removeLoop(Node head) {
+        Node startOfLoop = delectFirst(head);
+
+        if (startOfLoop == null) {
+            return head; // No loop detected, return the original list.
+        }
+
+        Node temp = startOfLoop;
+
+        while (temp.next != startOfLoop) {
+            temp = temp.next;
+        }
+        temp.next = null; // Remove the loop by breaking the last node's next pointer.
+        return head;
+    }
+
+}
