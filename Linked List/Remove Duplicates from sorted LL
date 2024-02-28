@@ -18,3 +18,34 @@ public class Solution {
         return head;
     }
 }
+...........................................................................................
+
+// optimal solution for sorted or unsorted list using hashmap
+import java.util.*;
+public class Solution {
+    public static Node uniqueSortedList(Node head) {
+        // Your code here
+          if (head == null || head.next == null) {
+            return head;
+        }
+
+        HashMap<Integer, Boolean> seenMap = new HashMap<>();
+        Node current = head;
+        Node previous = null;
+
+        while (current != null) {
+            if (seenMap.containsKey(current.data)) {
+                // Duplicate found, remove current node
+                previous.next = current.next;
+            } else {
+                seenMap.put(current.data, true);
+                previous = current;
+            }
+            current = current.next;
+        }
+
+        return head;
+       
+       
+    }
+}
