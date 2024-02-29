@@ -1,3 +1,5 @@
+optimal solution T.C = O(N) S.C = O(1)
+
 class Solution
 {
     
@@ -37,9 +39,7 @@ class Solution
     //Function to check whether the list is palindrome.
 
     boolean isPalindrome(Node head) 
-    {
-        //Your code here
-        
+    {   
         if(head == null || head.next == null){
             return true;
         }
