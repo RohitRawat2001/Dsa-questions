@@ -5,7 +5,6 @@ public class Solution
           if (head == null || head.next == null) {
             return head; 
         }
-    
         Node prev = null; Node curr = head;
         while(curr != null){
             prev = curr.prev;
