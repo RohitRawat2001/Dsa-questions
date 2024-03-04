@@ -1,0 +1,14 @@
+class Solution {
+    static int nthFibonacci(int n){
+        int n1 = 0;
+        int n2 = 1;
+        int nth = 0;
+        for(int i = 1; i <= n - 1; i++){
+            int n3 = (n1 + n2) % 1000000007;
+            n1 = n2;
+            n2 = n3;
+            nth = n3;
+        }
+        return nth;
+    }
+}
