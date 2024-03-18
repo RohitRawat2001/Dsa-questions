@@ -1,0 +1,35 @@
+
+class Solution {
+    public class Info {
+        int diam;
+        int ht;
+        boolean isBalanced;
+
+        public Info(int diam, int ht, boolean isBalanced) {
+            this.diam = diam;
+            this.ht = ht;
+            this.isBalanced = isBalanced;
+        }
+    }
+
+    public Info diameterHelper(TreeNode root) {
+        if (root == null) {
+            return new Info(0, 0, true);
+        }
+
+        Info leftInfo = diameterHelper(root.left);
+        Info rightInfo = diameterHelper(root.right);
+
+        int diam = Math.max(Math.max(rightInfo.diam, leftInfo.diam), leftInfo.ht + rightInfo.ht + 1);
+        int ht = Math.max(leftInfo.ht, rightInfo.ht) + 1;
+
+        boolean isBalanced = leftInfo.isBalanced && rightInfo.isBalanced && Math.abs(leftInfo.ht - rightInfo.ht) <= 1;
+
+        return new Info(diam, ht, isBalanced);
+    }
+
+    public boolean isBalanced(TreeNode root) {
+        return diameterHelper(root).isBalanced;
+    }
+}
+
