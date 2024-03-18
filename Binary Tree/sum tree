@@ -1,0 +1,69 @@
+class Solution {
+    public class Pair {
+        boolean first;
+        int second;
+
+        public Pair(boolean first, int second) {
+            this.first = first;
+            this.second = second;
+        }
+    }
+
+    public Pair isSumTreeFast(Node root) {
+        // Base case
+        if (root == null) return new Pair(true, 0);
+
+        // Leaf node
+        if (root.left == null && root.right == null) return new Pair(true, root.data);
+
+        // Check for left subtree
+        Pair leftAns = isSumTreeFast(root.left);
+
+        // Check for right subtree
+        Pair rightAns = isSumTreeFast(root.right);
+
+        // Check for current node
+        boolean left = leftAns.first;
+        boolean right = rightAns.first;
+        boolean condn = root.data == leftAns.second + rightAns.second;
+
+        Pair ans = new Pair(left && right && condn, root.data + leftAns.second + rightAns.second);
+
+        return ans;
+    }
+
+    public boolean isSumTree(Node root) {
+        Pair ans = isSumTreeFast(root);
+        return ans.first;
+    }
+}
+
+
+.............................................................................
+
+class Solution
+{
+	boolean isSumTree(Node root)
+	{
+         if (root == null || (root.left == null && root.right == null)) {
+            return true; // An empty tree or a single node tree is considered a sum tree.
+        }
+
+        int leftSum = sumTreeHelper(root.left);
+        int rightSum = sumTreeHelper(root.right);
+
+        if (root.data == leftSum + rightSum && isSumTree(root.left) && isSumTree(root.right)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private int sumTreeHelper(Node root) {
+        if (root == null) {
+            return 0;
+        }
+
+        return root.data + sumTreeHelper(root.left) + sumTreeHelper(root.right);
+    }
+}
