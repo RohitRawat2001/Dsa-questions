@@ -1,0 +1,22 @@
+class Solution{
+    
+     public void solve(Node node, List<Integer> ans, int level){        // node = root
+        if(node == null){
+            return;
+        }
+        
+          // We entered into a new level
+        if (level == ans.size()) {
+            ans.add(node.data);
+        }
+  
+        solve(node.right, ans, level + 1);
+        solve(node.left, ans, level + 1);  
+        
+    }
+    ArrayList<Integer> rightView(Node node) {
+        ArrayList<Integer> ans= new ArrayList<>();
+        solve(node,ans,0); 
+        return list;
+    }
+}
