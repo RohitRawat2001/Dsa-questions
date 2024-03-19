@@ -1,0 +1,48 @@
+class Solution
+{
+     private static class Pair {
+        Node node;
+        int hd;
+
+        Pair(Node node, int hd) {
+            this.node = node;
+            this.hd = hd;
+        }
+    }
+
+    static ArrayList<Integer> topView(Node root)
+    { 
+        ArrayList<Integer> ans = new ArrayList<>();
+        if (root == null) {
+            return ans;
+        }
+
+        Map<Integer, Integer> topNode = new TreeMap<>();
+        Queue<Pair> queue = new LinkedList<>();
+        queue.add(new Pair(root, 0));
+
+        while (!queue.isEmpty()) {
+            Pair temp = queue.poll();
+            Node frontNode = temp.node;
+            int hd = temp.hd;
+
+            // If one value is present for an HD, then do nothing
+            if (!topNode.containsKey(hd)) {
+                topNode.put(hd, frontNode.data);
+            }
+
+            if (frontNode.left != null) {
+                queue.add(new Pair(frontNode.left, hd - 1));
+            }
+            if (frontNode.right != null) {
+                queue.add(new Pair(frontNode.right, hd + 1));
+            }
+        }
+
+        for (int value : topNode.values()) {
+            ans.add(value);
+        }
+        return ans;
+    }
+
+}
