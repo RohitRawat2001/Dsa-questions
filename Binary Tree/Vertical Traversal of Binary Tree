@@ -1,0 +1,47 @@
+class Solution
+{
+    static ArrayList <Integer> verticalOrder(Node root)
+    {
+         Queue<Pair>q=new LinkedList<>();
+       ArrayList<Integer>arr=new ArrayList<>();
+       TreeMap<Integer,ArrayList<Integer>>t=new TreeMap<>();
+       q.offer(new Pair(root,0));
+       while (!q.isEmpty()){
+           Pair p=q.poll();
+           Node curr=p.node;
+           int hd= p.hd;
+           if (t.containsKey(hd)){
+               t.get(hd).add(curr.data);
+           }
+           else{
+               ArrayList<Integer>al=new ArrayList<>();
+               al.add(curr.data);
+               t.put(hd,al);
+           }
+           if (curr.left!=null){
+               q.offer(new Pair(curr.left,hd-1));
+           }
+           if (curr.right!=null){
+               q.offer(new Pair(curr.right,hd+1));
+           }
+       }
+       for (Map.Entry<Integer,ArrayList<Integer>>p:t.entrySet()){
+           ArrayList<Integer>e=p.getValue();
+           for (int x:e){
+               arr.add(x);
+           }
+       }
+       return arr;
+   }
+
+
+    static class Pair {
+   Node node;
+   int hd;
+   public Pair(Node n,int h){
+       this.node=n;
+       this.hd=h;
+      }
+        
+    }
+}
