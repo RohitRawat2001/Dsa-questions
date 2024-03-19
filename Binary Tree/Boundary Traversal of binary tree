@@ -1,0 +1,65 @@
+class Solution
+{
+       public void traverseLeft(Node root, ArrayList<Integer> ans) {
+        // base case
+        if (root == null || (root.left == null && root.right == null))
+            return;
+
+        ans.add(root.data);
+        if (root.left != null)
+            traverseLeft(root.left, ans);
+        else
+            traverseLeft(root.right, ans);
+    }
+
+    public void traverseLeaf(Node root, ArrayList<Integer> ans) {
+        // base case
+        if (root == null)
+            return;
+
+        if (root.left == null && root.right == null) {
+            ans.add(root.data);
+            return;
+        }
+
+        traverseLeaf(root.left, ans);
+        traverseLeaf(root.right, ans);
+    }
+
+    public void traverseRight(Node root, ArrayList<Integer> ans) {
+        // base case
+        if (root == null || (root.left == null && root.right == null))
+            return;
+
+        if (root.right != null)
+            traverseRight(root.right, ans);
+        else
+            traverseRight(root.left, ans);
+
+        // wapas aagye
+        ans.add(root.data);
+    }
+
+    public ArrayList<Integer> boundary(Node root) {
+        ArrayList<Integer> ans = new ArrayList<>();
+        if (root == null)
+            return ans;
+
+        ans.add(root.data);
+
+        // left part print/store
+        traverseLeft(root.left, ans);
+
+        // traverse Leaf Nodes
+
+        // left subtree
+        traverseLeaf(root.left, ans);
+        // right subtree
+        traverseLeaf(root.right, ans);
+
+        // traverse right part
+        traverseRight(root.right, ans);
+
+        return ans;
+    }
+}
