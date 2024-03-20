@@ -1,0 +1,31 @@
+class Solution
+{
+    int count =0;
+    private void solve(Node root,int k,ArrayList<Integer> list){
+        if(root==null)return;
+        
+        //we have to write code only for root 
+        list.add(root.data);
+        //check the path which have sum equal to k
+        int sum=0;
+        //we will backtrack(leaf node to root) so loop will run in reverse order
+        for(int i =list.size()-1;i>=0;i--){
+            sum+= list.get(i);
+            if(sum==k)
+                count++;
+        }
+        //it is faith that left child know how to find the number of paths
+        solve(root.left,k,list);
+        //it is faith that right child know how to find the number of paths   
+        solve(root.right,k,list);
+        //remove the last node
+        list.remove(list.size()-1);
+    }
+    public int sumK(Node root,int k)
+    {
+        // code here 
+        ArrayList<Integer> list = new ArrayList<>();
+        solve(root,k,list);
+        return count;
+    }
+}
