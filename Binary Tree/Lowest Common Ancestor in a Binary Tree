@@ -1,0 +1,56 @@
+class Solution
+{
+   
+	Node lca(Node root, int n1,int n2)
+	{
+	    if(root == null){
+	        return null;
+	    }
+	    
+  if (root.data == n1 || root.data == n2) {
+            return root;
+        }
+
+        Node leftAns = lca(root.left, n1, n2);
+        Node rightAns = lca(root.right, n1, n2);
+
+        if (leftAns != null && rightAns != null) {
+            return root;
+        } else if (leftAns != null && rightAns == null) {
+            return leftAns;
+        } else if (leftAns == null && rightAns != null) {
+            return rightAns;
+        } else {
+            return null;
+        }
+	}
+}
+....................................................................................................................
+using this type of methods
+......................................................................................................................
+
+
+public class Solution {
+    public static int lowestCommonAncestor(TreeNode<Integer> root, int x, int y) {
+       if (root == null) {
+            return -1; // or any other value indicating not found
+        }
+
+        if (root.data == x || root.data == y) {
+            return root.data;
+        }
+
+        int leftAns = lowestCommonAncestor(root.left, x, y);
+        int rightAns = lowestCommonAncestor(root.right, x, y);
+
+        if (leftAns != -1 && rightAns != -1) {
+            return root.data;
+        } else if (leftAns != -1) {
+            return leftAns;
+        } else if (rightAns != -1) {
+            return rightAns;
+        } else {
+            return -1; // or any other value indicating not found
+        }
+    }
+}
