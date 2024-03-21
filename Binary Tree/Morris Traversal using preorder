@@ -1,4 +1,4 @@
-
+//This is simple traversal using recursion T.C = O(N) S.C = O(N)
 class BinaryTree
 {
      static void solve(Node root, ArrayList<Integer> list){
