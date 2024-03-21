@@ -22,3 +22,34 @@ class Solution
 		}
     }
 }
+//////////////////// another version//////////////////
+
+
+
+public class Solution 
+{
+		static TreeNode<Integer> prev = null;
+    public static TreeNode<Integer> flattenBinaryTree(TreeNode<Integer> root)
+    {
+        // Write your code here.
+   
+        TreeNode<Integer> cur = root;
+		while (cur!=null)
+		{
+			if(cur.left!=null)
+			{
+				TreeNode<Integer> pre = cur.left;
+				while(pre.right!=null)
+				{
+					pre = pre.right;
+				}
+				pre.right = cur.right;
+				cur.right = cur.left;
+				cur.left = null;
+			}
+			cur = cur.right;
+		}
+		return root;
+    }
+    
+}
