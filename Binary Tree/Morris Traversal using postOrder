@@ -19,3 +19,40 @@ class Tree
        return list;
     }
 }
+
+..........................Now this is Morris traversal T.C = O(N) S.C = O(1)  it not using any recursion or stack..................................................
+
+ 😊😎 Notes that small changes : left = right or right = left or in last reverse it
+
+class Tree {
+    ArrayList<Integer> postOrder(Node root) {
+        ArrayList<Integer> list = new ArrayList<>();
+        Node curr = root;
+
+        while (curr != null) {
+            if (curr.right == null) {
+                list.add(curr.data);
+                curr = curr.left;
+            } else {
+                Node prev = curr.right;
+                while (prev.left != null && prev.left != curr) {
+                    prev = prev.left;
+                }
+
+                if (prev.left == null) {
+                    prev.left = curr;
+                    list.add(curr.data);
+                    curr = curr.right;
+                } else {
+                    prev.left = null;
+                    curr = curr.left;
+                }
+            }
+        }
+
+        // Reverse the result to obtain postorder traversal
+        Collections.reverse(list);
+
+        return list;
+    }
+}
