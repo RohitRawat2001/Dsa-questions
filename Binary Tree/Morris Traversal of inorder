@@ -1,0 +1,56 @@
+//This is simple traversal using recursion T.C = O(N) S.C = O(N)
+
+class Solution {
+    void inOrder(Node root, ArrayList<Integer> list) {
+        if (root == null) {
+            return;
+        }
+
+        // Traverse the left subtree
+        inOrder(root.left, list);
+
+        // Visit the current node
+        list.add(root.data);
+
+        // Traverse the right subtree
+        inOrder(root.right, list);
+    }
+
+    ArrayList<Integer> inOrder(Node root) {
+        ArrayList<Integer> list = new ArrayList<>();
+        inOrder(root, list);
+        return list;
+    }
+}
+
+..........................Now this is Morris traversal T.C = O(N) S.C = O(1)  it not using any recursion or stack..................................................
+
+class Solution {
+
+    ArrayList<Integer> inOrder(Node root) {
+    ArrayList<Integer> list = new ArrayList<>();
+    
+    Node curr = root;
+    while(curr != null){
+        if(curr.left == null){
+            list.add(curr.data);
+            curr = curr.right;
+        }else{
+            //find predecessor matlab ek baar left jaana fir tabtak right jaana jabtak null nahi hoojata
+            Node prev = curr.left;
+            while(prev.right != null && prev.right != curr){
+                prev = prev.right;
+            }
+            if(prev.right == null){
+                prev.right = curr;
+                curr = curr.left;
+            }else{
+                prev.right = null;
+                list.add(curr.data);
+                curr = curr.right;
+            }
+        }
+    }
+    return list;
+    }
+}
