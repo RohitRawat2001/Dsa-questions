@@ -20,3 +20,35 @@ class BinaryTree
     }
 
 }
+..........................Now this is Morris traversal T.C = O(N) S.C = O(1)  it not using any recursion or stack..................................................
+
+class BinaryTree
+{
+  
+    static ArrayList<Integer> preorder(Node root)
+    {
+       ArrayList<Integer> list = new ArrayList<>();
+       Node curr = root;
+       while(curr != null){
+           if(curr.left == null){
+               list.add(curr.data);
+               curr = curr.right;
+           }else{
+               Node prev = curr.left;
+               while(prev.right != null && prev.right != curr){
+                   prev = prev.right;
+               }
+               if(prev.right == null){
+                   prev.right = curr;
+                   list.add(curr.data);
+                   curr = curr.left;
+               }else{
+                   prev.right = null;
+                   curr = curr.right;
+               }
+           }
+       }
+       return list;
+    }
+
+}
