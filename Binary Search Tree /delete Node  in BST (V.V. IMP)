@@ -1,0 +1,34 @@
+class Tree {
+    public static Node inorderSuccessor(Node root){
+            while(root.left != null) {
+                root = root.left;
+            }
+        return root;
+    }
+    public static Node deleteNode(Node root, int X) {
+        if(root == null)
+           return root;
+
+       if(root.data > X){
+           root.left = deleteNode(root.left, X);
+       } else if(root.data < X){
+           root.right = deleteNode(root.right, X);
+       } else { // root.data == key
+             //case 1:if we delete a leaf node
+         if(root.left == null && root.right == null){
+             return null;
+         }
+         // Case 2: if we delete a  node with only one child
+         if(root.left == null)
+             return root.right;
+         else if(root.right == null)
+             return root.left;
+         
+         // Case 3: if we have two children, find inorder successor and replace the node with it
+         Node IS = inorderSuccessor(root.right);
+         root.data = IS.data;
+         root.right = deleteNode(root.right, IS.data);
+       }
+       return root;
+    }
+}
