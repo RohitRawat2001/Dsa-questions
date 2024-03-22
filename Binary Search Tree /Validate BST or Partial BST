@@ -18,3 +18,30 @@ public class Solution {
         return isBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 }
+
+
+approach 2 :  do in this first you find inorder traversal and then it is sorted so it is true or false
+
+public class Solution {
+    // Helper function for inorder traversal
+    private static void inorderTraversal(BinaryTreeNode<Integer> root, List<Integer> list) {
+        if (root == null) return;
+        
+        inorderTraversal(root.left, list);
+        list.add(root.data);
+        inorderTraversal(root.right, list);
+    }
+    
+    public static boolean validateBST(BinaryTreeNode<Integer> root) {
+        List<Integer> list = new ArrayList<>();
+        inorderTraversal(root, list);
+        
+        // Check if the inorder list is sorted
+        for (int i = 1; i < list.size(); i++) {
+            if (list.get(i) <= list.get(i - 1))
+                return false;
+        }
+        
+        return true;
+    }
+}
