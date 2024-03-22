@@ -1,0 +1,31 @@
+public class Solution {
+
+    public static int kthSmallest(TreeNode<Integer> root, int k) {
+        // Initialize count from 1
+        int[] count = new int[]{1};
+        return inOrderTraversal(root, k, count);
+    }
+
+    public static int inOrderTraversal(TreeNode<Integer> root, int k, int[] count) {
+        // Base case: if the root is null, return -1
+        if (root == null) {
+            return -1;
+        }
+        int left = inOrderTraversal(root.left, k, count);
+        // If kth smallest is found in the left subtree, return it
+        if (left != -1) {
+            return left;
+        }
+
+        // If current node is kth smallest, return its data
+        if (count[0] == k) {
+            return root.data;
+        }
+        
+        // Increment count since we've visited a node
+        count[0]++;
+
+       
+        return inOrderTraversal(root.right, k, count);
+    }
+}
