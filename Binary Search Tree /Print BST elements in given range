@@ -1,0 +1,32 @@
+
+class Solution
+{   
+    public static void solve(Node root, int low, int high, ArrayList<Integer> list){
+        // Base case: if root is null, return
+        if(root == null){
+            return;
+        }
+        
+        // If the current node's data falls within the given range
+        if(root.data >= low && root.data <= high){
+            // Recur for the left subtree
+            solve(root.left, low, high, list);
+            // Add the current node's data to the list
+            list.add(root.data);
+            // Recur for the right subtree
+            solve(root.right, low, high, list);
+        }
+        // If the current node's data is greater than the high value, explore left subtree
+        else if (root.data >= high){
+            solve(root.left, low, high, list);
+        }
+        // If the current node's data is less than the low value, explore right subtree
+        else{
+            solve(root.right, low, high, list);
+        }
+    }
+    public static ArrayList<Integer> printNearNodes(Node root, int low, int high) {
+       ArrayList<Integer> list = new ArrayList<>();
+       solve(root, low, high, list);
+       return list;
+    }
