@@ -1,0 +1,25 @@
+
+class Solution {
+ public static void solve(Node root,ArrayList<ArrayList<Integer>>path,ArrayList<Integer> list){
+         if(root==null)
+            return;
+            
+        list.add(root.data);
+        if(root.left==null && root.right==null){
+            path.add(new ArrayList(list));
+        }
+        solve(root.left,path,list);
+        solve(root.right,path,list);
+        list.remove(list.size()-1);
+    }
+    public static ArrayList<ArrayList<Integer>> Paths(Node root) {
+        if(root == null){
+            return null;
+        }
+        ArrayList<ArrayList<Integer>> path= new ArrayList<>();
+        ArrayList<Integer> list = new ArrayList<>();
+        solve(root ,path,list);
+        return path;
+    }
+}
+  
