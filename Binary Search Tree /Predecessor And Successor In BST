@@ -1,0 +1,47 @@
+import java.util.*;
+public class Solution {
+    public static List<Integer> predecessorSuccessor(TreeNode root, int key) {
+         List<Integer> result = new ArrayList<>();
+        TreeNode pred = null;
+        TreeNode succ = null;
+        TreeNode current = root;
+
+        while (current != null) {
+            if (current.data == key) {
+                if (current.left != null) {
+                    pred = current.left;
+                    while (pred.right != null) {
+                        pred = pred.right;
+                    }
+                }
+                if (current.right != null) {
+                    succ = current.right;
+                    while (succ.left != null) {
+                        succ = succ.left;
+                    }
+                }
+                break;
+            } else if (current.data < key) {
+                pred = current;
+                current = current.right;
+            } else {
+                succ = current;
+                current = current.left;
+            }
+        }
+
+        if (pred != null) {
+            result.add(pred.data);
+        } else {
+            result.add(-1); // Modify to add -1 when predecessor is not found
+        }
+
+        if (succ != null) {
+            result.add(succ.data);
+        } else {
+            result.add(-1);
+        }
+
+        return result;
+    }
+}
