@@ -1,0 +1,14 @@
+T.C = O(H) S.C = O(1)
+public static Node inorderSuccessor(Node root, int key) {
+        Node successor = null;
+
+        while (root != null) {
+            if (key.data >= root.data) {
+                root = root.right;
+            } else {
+                successor = root;
+                root = root.left;
+            }
+        }
+        return successor;
+    }
