@@ -1,0 +1,38 @@
+..Recursion..   
+
+Time complexity: O(2^n) - since T(n) = T(n-1) + T(n-2) is an exponential time
+Space complexity: O(n) - space for recursive function call stack
+
+class Solution {
+    public int fib(int n) {
+        if(n == 0 || n==1){       // if (n <= 1)
+            return n;
+        }
+
+        int ans =  fib(n-1) + fib(n-2);
+        return ans;    
+    }
+}
+
+
+..Iteration version ...
+
+Time complexity: O(n)
+Space complexity: O(1)
+
+class Solution {
+    public int fib(int n) {
+        if (n <= 1)
+            return n;
+
+        int a = 0, b = 1;
+
+        for (int i = 2; i <= n; i++) {
+            int sum = a + b;
+            a = b;
+            b = sum;
+        }
+
+        return b;
+    }
+}
