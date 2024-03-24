@@ -1,0 +1,26 @@
+import java.util.ArrayList;
+
+public class Solution {
+    public static BinaryTreeNode<Integer> prorderToBST(ArrayList<Integer> preorder) {
+        if (preorder == null || preorder.isEmpty()) {
+            return null;
+        }
+
+        int[] i = {0}; // To keep track of current index in preorder list
+        return solve(preorder, Integer.MIN_VALUE, Integer.MAX_VALUE, i);
+    }
+
+    public static BinaryTreeNode<Integer> solve(ArrayList<Integer> preorder, int mini, int maxi, int[] i) {
+        if (i[0] >= preorder.size() || preorder.get(i[0]) < mini || preorder.get(i[0]) > maxi) {
+            return null;
+        }
+
+        BinaryTreeNode<Integer> root = new BinaryTreeNode<>(preorder.get(i[0]));
+        i[0]++; // Move to next element in preorder list
+
+        root.left = solve(preorder, mini, root.data, i); // Recursively build left subtree
+        root.right = solve(preorder, root.data, maxi, i); // Recursively build right subtree
+
+        return root;
+    }
+}
