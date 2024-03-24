@@ -1,0 +1,31 @@
+Notes : 1. Normal bst or balanced bst ka inorder traversal sorted hoota hai esliya humna uska mid liya (wo root hi hogha)
+        2. then do inorder to bst
+class GfG
+{
+    public void inorderTraversal(Node root,ArrayList<Integer> list){
+        if(root == null){
+            return;
+        }
+        inorderTraversal(root.left,list);
+        list.add(root.data);
+        inorderTraversal(root.right,list);
+    }
+    public Node inorderToBST(int start,int end,ArrayList<Integer> list){
+        if(start > end){
+            return null;
+        }
+        int mid = start + (end - start)/2;
+        Node newRoot = new Node(list.get(mid));
+        newRoot.left = inorderToBST(start,mid-1,list);
+        newRoot.right = inorderToBST(mid+1,end,list);
+        return newRoot;
+    }
+    Node buildBalancedTree(Node root) 
+    {
+        ArrayList<Integer> list = new ArrayList<>();
+        inorderTraversal(root,list);
+        
+        return inorderToBST(0,list.size()-1,list);
+        
+    }
+}
