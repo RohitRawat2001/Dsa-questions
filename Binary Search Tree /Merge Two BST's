@@ -1,3 +1,6 @@
+T.C = O(N+M)
+S.C = O(N+M)
+
 public class Solution {
 
     // Inorder traversal
