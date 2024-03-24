@@ -1,0 +1,114 @@
+public class Solution {
+
+    // Inorder traversal
+    static void inorder(TreeNode<Integer> root, List<Integer> in) {
+        if (root == null) {
+            return;
+        }
+
+        inorder(root.left, in);
+        in.add(root.data);
+        inorder(root.right, in);
+    }
+
+    // Merging of both the data values which are stored in the ArrayList
+    static ArrayList<Integer> mergeArrays(ArrayList<Integer> a,
+     ArrayList<Integer> b) {
+        ArrayList<Integer> ans = new ArrayList<>(a.size() + b.size());
+
+        int i = 0, j = 0, k = 0;
+
+        while (i < a.size() && j < b.size()) {
+            if (a.get(i) < b.get(j)) {
+                ans.add(k, a.get(i));
+                i++;
+                k++;
+            } else {
+                ans.add(k, b.get(j));
+                j++;
+                k++;
+            }
+        }
+
+        while (i < a.size()) {
+            ans.add(k, a.get(i));
+            k++;
+            i++;
+        }
+
+        while (j < b.size()) {
+            ans.add(k, b.get(j));
+            k++;
+            j++;
+        }
+
+        return ans;
+    }
+
+    // Creation of BST from merged data
+    static TreeNode<Integer> normalToBST(int s, int e, ArrayList<Integer> in) {
+        if (s > e) {
+            return null;
+        }
+
+        int mid = (s + e) / 2;
+        TreeNode<Integer> root = new TreeNode<>(in.get(mid)); // Store the mid value of inorder
+        // Now do recursive calls
+        root.left = normalToBST(s, mid - 1, in); // Starting position is 's' and ending is 'mid-1'
+        root.right = normalToBST(mid + 1, e, in); // Starting position is 'mid+1' and ending is 'e'
+        return root;
+    }
+
+    // Merge two BSTs
+    static TreeNode<Integer> mergeBST(TreeNode<Integer> root1, TreeNode<Integer> root2) {
+        // Store the inorder values in ArrayList
+        ArrayList<Integer> BST1 = new ArrayList<>();
+        ArrayList<Integer> BST2 = new ArrayList<>();
+        inorder(root1, BST1);
+        inorder(root2, BST2);
+
+        // Merge the values of both ArrayLists into a single ArrayList
+        ArrayList<Integer> mergeArray = mergeArrays(BST1, BST2);
+
+        // Create BST from merged values
+        int s = 0;
+        int e = mergeArray.size() - 1;
+        return normalToBST(s, e, mergeArray);
+    }
+}
+
+........................... 2 version .......................................
+
+
+class Solution
+{
+    public List<Integer> merge(Node root1,Node root2)
+    {
+        List<Integer>list1 = new ArrayList<>();
+        List<Integer>list2 = new ArrayList<>();
+        inorder(list1,root1);
+        inorder(list2,root2);
+        
+        /* merge two sorted list */
+        List<Integer>merge= new ArrayList<>();
+        int n = list1.size(),m = list2.size();
+        int i=0,j=0;
+        while(i<n && j<m){
+            if(list1.get(i)<list2.get(j)){
+                merge.add(list1.get(i++));
+            }else{
+                merge.add(list2.get(j++));
+            }
+        }
+        while(i<n)merge.add(list1.get(i++));
+        while(j<m)merge.add(list2.get(j++));
+        return merge;
+    }
+    
+    public void inorder(List<Integer>list, Node root){
+        if(root == null)return;
+        inorder(list,root.left);
+        list.add(root.data);
+        inorder(list,root.right);
+    }
+}
