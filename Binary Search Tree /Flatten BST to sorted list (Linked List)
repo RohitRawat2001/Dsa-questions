@@ -1,0 +1,32 @@
+Time complexity = O(N)
+Space = O(H)
+
+class Solution {
+    public void inorder(Node root,ArrayList<Integer> list){
+       if(root == null){
+           return;
+       } 
+       inorder(root.left,list);
+       list.add(root.data);
+       inorder(root.right,list);
+    }
+    public Node flattenBST(Node root) {
+       ArrayList<Integer> list = new ArrayList<>();
+       inorder(root,list);
+       
+       Node newRoot = new Node(list.get(0));
+       Node curr = newRoot;
+       
+       for(int i = 1;i < list.size() ; i++){
+           Node temp = new Node(list.get(i));
+            curr.left = null;
+            curr.right = temp;
+            curr = temp;
+       }
+       // last node 
+       curr.left = null;
+       curr.right = null;
+       
+       return newRoot;
+    }
+}
