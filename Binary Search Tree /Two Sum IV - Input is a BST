@@ -1,0 +1,32 @@
+same as array 2 sum optimal solution
+
+class Solution {
+    public void inorderTraversal(TreeNode root,ArrayList<Integer> list){
+        if(root == null){
+            return;
+        }
+
+        inorderTraversal(root.left,list);
+        list.add(root.val);
+        inorderTraversal(root.right,list);
+    }
+    public boolean findTarget(TreeNode root, int k) {
+        ArrayList<Integer> list = new ArrayList<>();
+        inorderTraversal(root,list);   //sorted list
+
+        int i = 0;
+        int j = list.size() - 1;
+
+        while(i < j){
+            int sum = list.get(i) + list.get(j);
+            if(sum == k){
+                return true;
+            }else if(sum > k){
+                j--;
+            }else{
+                i++;
+            }
+        }
+        return false; 
+    }
+}
