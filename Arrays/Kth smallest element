@@ -1,7 +1,7 @@
 approach 1 :  Arrays.sort(arr);
               return arr[k-1];      time =  nlogn
 
-approach 2 : 
+approach 2 : using max heap  (NOte that using max heap you find kth smallest element and using min heap you find kth largest element
 Time Complexity = O(nlogK) S.C = O(K)
 
 class Solution{
