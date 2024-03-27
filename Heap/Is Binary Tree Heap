@@ -1,0 +1,47 @@
+class Solution {
+       static int countNodes(Node root) {
+        if (root == null) {
+            return 0;
+        }
+
+        int ans = 1 + countNodes(root.left) + countNodes(root.right);
+        return ans;
+    }
+
+    static boolean isCBT(Node root, int index, int cnt) {
+        if (root == null)
+            return true;
+        if (index >= cnt)
+            return false;
+        else {
+            boolean left = isCBT(root.left, 2 * index + 1, cnt);
+            boolean right = isCBT(root.right, 2 * index + 2, cnt);
+            return (left && right);
+        }
+    }
+
+    static boolean isMaxOrder(Node root) {
+        if (root.left == null && root.right == null) {
+            return true;
+        }
+
+        if (root.right == null) {
+            return (root.data > root.left.data);
+        } else {
+            boolean left = isMaxOrder(root.left);
+            boolean right = isMaxOrder(root.right);
+
+            return (left && right && (root.data > root.left.data && root.data > root.right.data));
+        }
+    }
+
+    static boolean isHeap(Node tree) {
+        int index = 0;
+        int totalCount = countNodes(tree);
+        if (isCBT(tree, index, totalCount) && isMaxOrder(tree)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
