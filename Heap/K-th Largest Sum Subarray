@@ -19,4 +19,4 @@ class Solution {
          return mini.peek();
     }
 }
- 
+ same as largest sum in array 
