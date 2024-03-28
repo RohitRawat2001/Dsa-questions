@@ -1,0 +1,52 @@
+Approach 1 : same as using in merge k sorted array
+Approach 2 : same as merge k sorted array
+import java.util.*;
+public class Solution {
+    public static LinkedListNode<Integer> mergeKLists(LinkedListNode<Integer>[] listArray) {
+        // Write your code here.
+        PriorityQueue<LinkedListNode<Integer>> minHeap = new PriorityQueue<>(Comparator.comparingInt(a -> a.data));
+        int k = listArray.length;
+
+        if (k == 0) {
+            return null;
+        }
+
+
+        // priority_queue 'pq' implemented as min heap with the help of 'compare' function
+
+        // Push the head nodes of all the k lists into 'pq'
+        for (int i = 0; i < k; i++) {
+            if (listArray[i] != null) {
+                minHeap.add(listArray[i]);
+            }
+        }
+
+        LinkedListNode<Integer> head = null, last = null;
+        // Loop till 'pq' is not empty
+        while (!minHeap.isEmpty()) {
+            // Get the top element of 'pq'
+            LinkedListNode<Integer> top = minHeap.poll();
+
+            // Check if there is a node next to the 'top' node in the list of which 'top' node is a member
+            if (top.next != null) {
+                // Push the next node into 'pq'
+                minHeap.add(top.next);
+            }
+
+            // If the final merged list is empty
+            if (head == null) {
+                head = top;
+                // Points to the last node so far of the final merged list
+                last = top;
+            } else {
+                // Insert 'top' at the end of the merged list so far
+                last.next = top;
+                // Update the 'last' pointer
+                last = top;
+            }
+        }
+
+        // Head node of the required merged list
+        return head;
+    }
+}
