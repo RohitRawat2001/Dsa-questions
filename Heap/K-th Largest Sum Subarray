@@ -1,0 +1,22 @@
+class Solution {
+    public static int kthLargest(int N, int K, int[] Arr) {
+         PriorityQueue<Integer> mini = new PriorityQueue<>();
+         
+         for(int i = 0 ; i < N ; i++){
+             int sum = 0;
+             for(int j = i ; j < N; j++){
+                 sum += Arr[j];
+                 if(mini.size() < K){
+                     mini.add(sum);
+                 }else{
+                     if(sum > mini.peek()){
+                         mini.poll();
+                         mini.add(sum);
+                     }
+                 }
+             }
+         }
+         return mini.peek();
+    }
+}
+ 
