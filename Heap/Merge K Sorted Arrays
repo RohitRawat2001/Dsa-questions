@@ -1,0 +1,47 @@
+import java.util.*;
+
+class Node {
+    int data;
+    int row;
+    int col;
+
+    Node(int data, int row, int col) {
+        this.data = data;
+        this.row = row;
+        this.col = col;
+    }
+}
+
+public class Solution {
+
+    public static ArrayList<Integer> mergeKSortedArrays(ArrayList<ArrayList<Integer>> kArrays, int k) {
+        PriorityQueue<Node> minHeap = new PriorityQueue<>((a, b) -> Integer.compare(a.data, b.data));
+
+        // Add the first element of each array to the heap
+        for (int i = 0; i < k; i++) {
+            if (!kArrays.get(i).isEmpty()) {
+                Node temp = new Node(kArrays.get(i).get(0), i, 0);
+                minHeap.add(temp);
+            }
+        }
+
+        ArrayList<Integer> ans = new ArrayList<>();
+
+        // Merge elements from the heap
+        while (!minHeap.isEmpty()) {
+            Node temp = minHeap.poll();
+            ans.add(temp.data);
+
+            int row = temp.row;
+            int col = temp.col;
+
+            if (col + 1 < kArrays.get(row).size()) {
+                Node next = new Node(kArrays.get(row).get(col + 1), row, col + 1);
+                minHeap.add(next);
+            }
+        }
+
+        return ans;
+    }
+
+}
