@@ -1,0 +1,63 @@
+
+
+import java.util.*;
+
+public class Solution {
+    public static int signum(int a, int b) {
+        if (a == b)
+            return 0;
+        else if (a > b)
+            return 1;
+        else
+            return -1;
+    }
+
+    public static void calMedian(int element, PriorityQueue<Integer> maxHeap,
+                                 PriorityQueue<Integer> minHeap, int[] medianArr) {
+        switch (signum(maxHeap.size(), minHeap.size())) {
+            case 0:
+                if (element > medianArr[0]) {
+                    minHeap.add(element);
+                    medianArr[0] = minHeap.peek();
+                } else {
+                    maxHeap.add(element);
+                    medianArr[0] = maxHeap.peek();
+                }
+                break;
+            case 1:
+                if (element > medianArr[0]) {
+                    minHeap.add(element);
+                    medianArr[0] = (minHeap.peek() + maxHeap.peek()) / 2;
+                } else {
+                    minHeap.add(maxHeap.poll());
+                    maxHeap.add(element);
+                    medianArr[0] = (minHeap.peek() + maxHeap.peek()) / 2;
+                }
+                break;
+            case -1:
+                if (element > medianArr[0]) {
+                    maxHeap.add(minHeap.poll());
+                    minHeap.add(element);
+                    medianArr[0] = (minHeap.peek() + maxHeap.peek()) / 2;
+                } else {
+                    maxHeap.add(element);
+                    medianArr[0] = (minHeap.peek() + maxHeap.peek()) / 2;
+                }
+                break;
+        }
+    }
+
+    public static int[] findMedian(int[] arr, int n) {
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        int[] medianArr = new int[1];
+        int[] ans = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            calMedian(arr[i], maxHeap, minHeap, medianArr);
+            ans[i] = medianArr[0];
+        }
+
+        return ans;
+    }
+}
