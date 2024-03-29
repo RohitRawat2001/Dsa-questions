@@ -1,3 +1,5 @@
+T.C = O(L)
+
 //Function to insert string into TRIE.
 static void insert(TrieNode root, String key) 
 {
