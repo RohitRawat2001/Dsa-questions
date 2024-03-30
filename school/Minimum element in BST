@@ -1,0 +1,9 @@
+class Solution {
+    int minValue(Node root) {
+        if(root.left == null){
+            return root.data;
+        }
+        int ans =  minValue(root.left);
+        return ans;
+    }
+}
