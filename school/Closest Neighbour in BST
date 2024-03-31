@@ -1,0 +1,19 @@
+class Solution {
+    public static int findMaxForN(Node root, int n) {
+      int closest = -1; // Initialize closest as -1
+    
+    // Traverse the BST
+    while (root != null) {
+        // If current node's key is less than or equal to n, update closest and move to the right subtree
+        if (root.key <= n) {
+            closest = root.key; // Update closest to the current node's key
+            root = root.right; // Move to the right subtree
+        } 
+        // If current node's key is greater than n, move to the left subtree
+        else {
+            root = root.left; // Move to the left subtree
+        }
+    }
+    return closest; // Return the closest number found
+    }
+}
