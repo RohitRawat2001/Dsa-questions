@@ -6,7 +6,6 @@ Output: 3
 Explanation: There are total 3 pairs whose sum is 15 : (4,11) , (3,12) and (2,13)
 
 class Solution {
-
     public static int countPairs(LinkedList<Integer> head1, LinkedList<Integer> head2,
                           int x) {
  int count = 0;
