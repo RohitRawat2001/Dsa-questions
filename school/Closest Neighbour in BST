@@ -1,7 +1,7 @@
 class Solution {
     public static int findMaxForN(Node root, int n) {
       int closest = -1; // Initialize closest as -1
-    
+
     // Traverse the BST
     while (root != null) {
         // If current node's key is less than or equal to n, update closest and move to the right subtree
