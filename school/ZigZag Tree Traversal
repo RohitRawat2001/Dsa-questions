@@ -1,4 +1,3 @@
-
 class GFG
 {
     //Function to store the zig zag order traversal of tree in a list.
