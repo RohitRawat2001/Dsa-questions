@@ -1,3 +1,4 @@
+
 class GFG{
     //Function to store the zig zag order traversal of tree in a list.
 	ArrayList<Integer> zigZagTraversal(Node root)
