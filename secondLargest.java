@@ -13,7 +13,5 @@ public class secondLargest {
 
  System.out.println(a[1]);
        
-        }
-    
-    
+        }    
 }
