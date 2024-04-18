@@ -9,7 +9,6 @@ Swapping 1 and 3, makes the array 3 2 1 4 5.
 Now, swapping 2 and 4, makes the array 3 4 1 2 5. 
 Again,swapping 1 and 5, makes the array 3 4 5 2 1.
 
-
 class Solution {
     public void swapElements(int[] arr, int n) {
       for(int i = 0;i<n-2;i++){
