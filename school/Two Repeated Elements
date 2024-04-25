@@ -1,0 +1,24 @@
+class Solution
+{
+    //Function to find two repeated elements.
+    public int[] twoRepeated(int arr[], int n)
+    {
+        ArrayList<Integer> ans = new ArrayList<>();
+        HashSet<Integer> hs = new HashSet<>();
+
+        for (int num : arr) {
+            if (hs.add(num) == false) { // (!hs.add(num)) // already exists in array
+                ans.add(num);
+            }
+        }
+
+        // Convert ArrayList to array
+        int[] result = new int[ans.size()];
+        for (int i = 0; i < ans.size(); i++) {
+            result[i] = ans.get(i);
+        }
+
+        return result;
+    }
+    
+}
