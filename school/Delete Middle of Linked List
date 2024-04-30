@@ -1,4 +1,3 @@
-
 class Solution {
     Node deleteMid(Node head) {
          if(head.next == null) {
