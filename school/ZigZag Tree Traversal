@@ -1,4 +1,3 @@
-
 class GFG{
 	ArrayList<Integer> zigZagTraversal(Node root)
 	{
