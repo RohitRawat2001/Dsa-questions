@@ -1,6 +1,5 @@
 class Solution
 {
-    //Function to find two repeated elements.
     public int[] twoRepeated(int arr[], int n)
     {
         ArrayList<Integer> ans = new ArrayList<>();
