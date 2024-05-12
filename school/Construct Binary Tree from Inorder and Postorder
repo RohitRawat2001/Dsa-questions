@@ -7,7 +7,6 @@ class GfG {
         }
         return -1;
     }
-
     private static Node solve(int[] in, int[] post, int[] postorderIndex, int inorderStart, int inorderEnd, int n) {
         if (postorderIndex[0] < 0 || inorderStart > inorderEnd) {
             return null;
