@@ -6,7 +6,7 @@ class Solution
         HashSet<Integer> hs = new HashSet<>();
 
         for (int num : arr) {
-            if (hs.add(num) == false) { // (!hs.add(num)) // already exists in array
+            if (hs.add(num) == false) { // (!hs.add(num)) // already exists in array 
                 ans.add(num);
             }
         }
