@@ -1,0 +1,29 @@
+class Solve {
+    int[] findTwoElement(int arr[], int n) {
+        int[] hash = new int[n + 1]; // Initialize hash array with size n+1, default values are 0
+        
+        // Fill the hash array with counts of each element
+        for (int i = 0; i < n; i++) {
+            hash[arr[i]]++;
+        }
+        
+        int repeating = -1;
+        int missing = -1;
+        
+        // Find the missing and repeating numbers
+        for (int i = 1; i <= n; i++) { // Loop from 1 to n
+            if (hash[i] == 0) {
+                missing = i;
+            } else if (hash[i] == 2) {
+                repeating = i;
+            }
+            
+            // If both missing and repeating numbers are found, break the loop
+            if (repeating != -1 && missing != -1) {
+                break;
+            }
+        }
+        
+        return new int[]{repeating, missing}; // Return the result as an array
+    }
+}
