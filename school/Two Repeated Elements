@@ -10,7 +10,6 @@ class Solution
                 ans.add(num);
             }
         }
-
         // Convert ArrayList to array
         int[] result = new int[ans.size()];
         for (int i = 0; i < ans.size(); i++) {
