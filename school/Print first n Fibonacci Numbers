@@ -11,7 +11,7 @@ class Solution
             fib[0] = 1;
         }
         if (n >= 2) {
-            fib[1] = 1;
+            fib[1] =1;
         }
         
         // Calculate Fibonacci numbers and store them in the array
