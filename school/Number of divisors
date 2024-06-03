@@ -1,7 +1,6 @@
 Given an integer N, find the number of divisors of N that are divisible by 3.
 
 Example 1:
-
 Input : 6
 Output: 2
 Explanation: 1, 2, 3, 6 are divisors 
