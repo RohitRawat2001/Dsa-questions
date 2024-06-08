@@ -7,7 +7,6 @@ query[] = {0,1}
 Output : 
 2
 1
-
 Explanation: 
 For 1st query, the given index is 0, a[0] = 4. There are 2 elements(1 and 3) which are less than or equal to 4.
 For 2nd query, the given index is 1, a[1] = 1. There exists only 1 element(1) which is less than or equal to 1.
