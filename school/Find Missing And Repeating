@@ -1,3 +1,4 @@
+
 class Solve {
     int[] findTwoElement(int arr[], int n) {
         int[] hash = new int[n + 1]; // Initialize hash array with size n+1, default values are 0
