@@ -2,7 +2,6 @@ You are given an integer n, return the fibonacci series till the nth(0-based ind
 modulo 10^9+7.         <---important terms
 
 Example 1:
-
 Input:
 n = 5
 Output:
