@@ -5,7 +5,6 @@ Output:
 Explanation: 
 After removing duplicate characters such as E, e, k, s, we have string as "geEksforG".
 
-
 class Solution {
     String removeDuplicates(String str) {
       HashSet<Character> set = new HashSet<>();
