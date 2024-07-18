@@ -1,0 +1,24 @@
+public static char getMaxOccuringChar(String s)
+    {
+        int count=0;
+        char ch=' ';
+        
+        for(int i=0;i<s.length();i++) {
+            int cnt=0;
+            for(int j=i;j<s.length();j++) {
+                if(s.charAt(i)==s.charAt(j)) {
+                    cnt++;
+                    }
+            }
+            if(cnt>count) {
+                count=cnt;
+                ch=s.charAt(i);
+            }
+            else if(cnt==count) {
+                if(ch>s.charAt(i)) {
+                    ch=s.charAt(i);
+                 }
+            }
+        }
+        return ch;
+    }
