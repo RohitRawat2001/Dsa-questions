@@ -1,6 +1,5 @@
 public class Solution {
     public static boolean checkPalindrome(String str) {
-
 //Removing any characters that are not letters or digits.
   //Converting the entire string to lowercase
         str = str.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
