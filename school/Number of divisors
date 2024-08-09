@@ -5,6 +5,7 @@ Output: 2
 Explanation: 1, 2, 3, 6 are divisors 
 of 6 out of which 3 and 6 are divisible 
 by 3.
+
 class Solution{
     static long count_divisors(int N){
       long count=0;
