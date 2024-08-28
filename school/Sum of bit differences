@@ -6,6 +6,7 @@ Explanation: All possible pairs of an array are (1, 1), (1, 2), (2, 1), (2, 2).
 Sum of bit differences = 0 + 2 + 2 + 0 = 4
 
 
+
 class Solution {
     long sumBitDifferences(int[] arr, int n) {
         long res = 0;
