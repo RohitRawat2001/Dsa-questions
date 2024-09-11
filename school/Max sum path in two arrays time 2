@@ -1,0 +1,54 @@
+class Solution {
+    public int maxPathSum(List<Integer> arr1, List<Integer> arr2) {
+          int ptr1 = 0; // Pointer for arr1
+        int ptr2 = 0; // Pointer for arr2
+        int sum1 = 0; // Sum of elements in arr1
+        int sum2 = 0; // Sum of elements in arr2
+        int result = 0; // Resultant maximum path sum
+        int n = arr1.size(); // Size of arr1
+        int m = arr2.size(); // Size of arr2
+
+        // Traverse both lists until one of them is exhausted
+        while (ptr1 < n && ptr2 < m) {
+            if (arr1.get(ptr1) < arr2.get(ptr2)) {
+                
+                sum1 += arr1.get(ptr1); // Add element to sum1 if arr1 element is smaller
+                ptr1++;
+                
+            } else if (arr1.get(ptr1) > arr2.get(ptr2)) {
+                
+                sum2 += arr2.get(ptr2); // Add element to sum2 if arr2 element is smaller
+                ptr2++;
+                
+            } else {
+                
+                // If elements are equal, add the maximum of sum1 and sum2 to result
+                result += Math.max(sum1, sum2) + arr1.get(ptr1);
+                ptr1++;
+                ptr2++;
+                sum1 = 0; // Reset sum1
+                sum2 = 0; // Reset sum2
+                
+            }
+        }
+
+        // Add remaining elements of arr1 to sum1
+        while (ptr1 < n) {
+            
+            sum1 += arr1.get(ptr1);
+            ptr1++;
+            
+        }
+
+        // Add remaining elements of arr2 to sum2
+        while (ptr2 < m) {
+            
+            sum2 += arr2.get(ptr2);
+            ptr2++;
+            
+        }
+
+        // Add the maximum of the remaining sums to the result
+        return result + Math.max(sum1, sum2);
+    }
+}
