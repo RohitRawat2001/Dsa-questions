@@ -1,0 +1,64 @@
+//Brute Force Approach :  Time Complexity: O(n²)
+                         Space Complexity: O(n)
+
+public class RemoveDuplicatesBruteForce {
+    public static String removeDuplicates(String str) {
+        StringBuilder result = new StringBuilder();
+        
+        for (int i = 0; i < str.length(); i++) {
+            char currentChar = str.charAt(i);
+            boolean foundDuplicate = false;
+
+            // Check if the character already exists in the result string
+            for (int j = 0; j < result.length(); j++) {
+                if (result.charAt(j) == currentChar) {
+                    foundDuplicate = true;
+                    break;
+                }
+            }
+            // If no duplicate found, append to result
+            if (!foundDuplicate) {
+                result.append(currentChar);
+            }
+        }
+        return result.toString();
+    }
+}
+
+Better Approach (Using Sorting)........... Time Complexity: O(n log n) for sorting + O(n) for removing duplicates
+                                            Space Complexity: O(n)
+
+ public static String removeDuplicates(String str) {
+        char[] chars = str.toCharArray();
+        Arrays.sort(chars);  // O(n log n)
+        StringBuilder result = new StringBuilder();
+
+        for (int i = 0; i < chars.length; i++) {
+            // Append the first character or if the current character is not same as the previous one
+            if (i == 0 || chars[i] != chars[i - 1]) {
+                result.append(chars[i]);
+            }
+        }
+        return result.toString();
+    }
+}
+
+Optimal Approach (Using HashSet) ............Time Complexity: O(n)
+                                             Space Complexity: O(n)
+
+public static String removeDuplicates(String str) {
+        HashSet<Character> seen = new HashSet<>();  // O(1) lookup
+        StringBuilder result = new StringBuilder();
+
+        for (char c : str.toCharArray()) {
+            // Add to result if character is not already present in the set
+            if (!seen.contains(c)) {
+                seen.add(c);
+                result.append(c);
+            }
+        }
+        return result.toString();
+    }
+}
+
+  
