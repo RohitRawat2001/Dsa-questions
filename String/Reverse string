@@ -1,3 +1,50 @@
+// When String as an input : 
+
+-- //BruteForce
+
+class Reverse {
+    public static String reverseString(String s) {
+        String revString = "";
+        
+        for(int i = revString.length()-1 ; i >= 0 ; i--){
+            revString += s.charAt(i);
+        }
+    return revString;
+    }
+}
+
+// better 
+
+class Reverse {
+    public static String reverseString(String s) {
+    
+       if (s.isEmpty()) {
+            return s;
+        }
+        return reverseString(s.substring(1)) + s.charAt(0);
+    
+    }
+}
+
+// optimise code
+
+class Reverse {
+    public static String reverseString(String s) {
+
+    StringBuilder sb = new StringBuilder(s);
+    
+    String reversed = sb.reverse().toString();
+    
+    return reversed;
+    
+    }
+}
+
+
+
+
+
+// void method
 class Solution {
     public void reverseString(char[] s) {
         int i = 0;
