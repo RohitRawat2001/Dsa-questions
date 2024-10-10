@@ -1,4 +1,3 @@
-
 class Solution {
     static void reArrange(int[] arr, int N) {
              ArrayList<Integer> even = new ArrayList<>();
