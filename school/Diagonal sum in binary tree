@@ -1,5 +1,4 @@
 class Tree {
-
     public static ArrayList <Integer> diagonalSum(Node root) 
     {
           ArrayList<Integer> ans = new ArrayList<>();
