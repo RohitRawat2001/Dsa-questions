@@ -1,3 +1,4 @@
+
 class Solution {
     int countPairs(int mat1[][], int mat2[][], int n, int x) {        
       HashSet<Integer> set = new HashSet<>();
