@@ -8,7 +8,6 @@ Input: arr[] = [1, 2, 3, 4, 5]
 Output: [0, 0, 0, 0, 0]
 Explanation: There are 0 smaller elements right after 1. There are 0 smaller elements right after 2. And so on.
 
-
 class Solution {
     int[] constructLowerArray(int[] arr) {
         int n = arr.length;
