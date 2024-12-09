@@ -1,0 +1,27 @@
+import java.util.ArrayList;
+
+class Solution {
+    static ArrayList<Integer> leaders(int arr[]) {
+        int n = arr.length;
+
+        ArrayList<Integer> ans = new ArrayList<>();
+        int max = arr[n - 1]; // Last element is always a leader
+        ans.add(max);
+
+        // Traverse the array from right to left
+        for (int i = n - 2; i >= 0; i--) {
+            if (arr[i] >= max) {
+                ans.add(arr[i]);
+                max = arr[i];
+            }
+        }
+
+        // Since we added leaders from right to left, reverse the result for correct order
+        ArrayList<Integer> result = new ArrayList<>();
+        for (int i = ans.size() - 1; i >= 0; i--) {
+            result.add(ans.get(i));
+        }
+
+        return result;
+    }
+}
