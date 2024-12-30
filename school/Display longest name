@@ -1,0 +1,26 @@
+class Solution {
+    public String longest(List<String> names) {
+        String longestString = "";            // Variable to store the longest string
+        int maxLength = 0;                    // Variable to store the maximum character count
+
+        // Loop through the list of strings
+        for (int i = 0; i < names.size(); i++) {
+            String name = names.get(i);             // Get the current string
+            int count = 0;                          // Initialize the character count
+
+            // Use a for loop to iterate through characters
+            for (int j = 0; j < name.length(); j++) {
+                char c = name.charAt(j);             // Access each character using charAt
+                count++;                             // Increment count for each character
+            }
+
+            // Update the longest string if the current string is longer
+            if (count > maxLength) {
+                maxLength = count;
+                longestString = name;
+            }
+        }
+
+        return longestString;                       // Return the longest string Return the longest string
+    }
+}
