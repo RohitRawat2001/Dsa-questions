@@ -1,0 +1,30 @@
+ // Helper method to reverse elements of the ArrayList from index `start` to `end`
+    void reverse(ArrayList<Long> arr, int start, int end) {
+        while (start < end) {
+            long temp = arr.get(start);
+            arr.set(start, arr.get(end));
+            arr.set(end, temp);
+            start++;
+            end--;
+        }
+    }
+
+    // Function to reverse every sub-array group of size k
+    void reverseInGroups(ArrayList<Long> arr, int k) {
+        int n = arr.size();
+
+        // Handle the edge case where the array is empty
+        if (n == 0) {
+            return;
+        }
+
+        // Reverse each group
+        for (int i = 0; i < n; i += k) {
+            // Calculate the end index of the current group
+            int end = Math.min(i + k - 1, n - 1);
+
+            // Reverse the current group
+            reverse(arr, i, end);
+        }
+   }
+}
