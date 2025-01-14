@@ -1,0 +1,27 @@
+Input: arr[] = [1, 2, 0, 3]
+Output: 2 
+Explanation: The sum of left of index 2 is 1 + 2 = 3 and sum on right of index 2 is 0 + 3 = 3.
+
+````````````````````````````````````````````````````````````
+
+class Solution {
+    // Function to find equilibrium point in the array.
+    public static int findEquilibrium(int arr[]) {
+        
+        int total = 0;
+        int left = 0;
+        
+        for(int i = 0 ; i < arr.length ; i++){
+            total += arr[i];
+        }
+        
+        for(int i = 0 ; i < arr.length ; i++){
+            total -= arr[i];
+            if(total == left){
+                return i;
+            }
+            left += arr[i];
+        }
+        return -1;
+    }
+}
